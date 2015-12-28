@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.3.0'
 
 gem 'rails', '>= 5.0.0.beta1', '< 5.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -8,6 +8,7 @@ gem 'rails', '>= 5.0.0.beta1', '< 5.1'
 # Use Puma as the app server
 gem 'puma'
 gem 'rack-heartbeat'
+gem 'unicorn'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -17,6 +18,11 @@ gem 'rack-heartbeat'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+end
 
 group :development, :test do
   gem 'annotate'
