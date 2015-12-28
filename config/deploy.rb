@@ -37,6 +37,15 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :unicorn_roles, :web
 
 namespace :deploy do
+  # /var/www/a-know-home を掘るためのタスク
+  task :setup_deploy_to do
+    on roles(:web, :batch) do |host|
+      if test("[ ! -d #{deploy_to} ]")
+        sudo "install --owner=#{host.user} --mode=0755 -d #{deploy_to}"
+      end
+    end
+  end
+  before 'deploy:starting', 'deploy:setup_deploy_to'
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
