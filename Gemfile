@@ -9,6 +9,7 @@ gem 'rails', '>= 5.0.0.beta1', '< 5.1'
 gem 'capistrano-rails', group: :development
 gem 'puma'
 gem 'rack-heartbeat'
+gem 'unicorn'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
