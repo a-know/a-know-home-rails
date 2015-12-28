@@ -6,7 +6,6 @@ gem 'rails', '>= 5.0.0.beta1', '< 5.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 # Use Puma as the app server
-gem 'capistrano-rails', group: :development
 gem 'puma'
 gem 'rack-heartbeat'
 gem 'unicorn'
@@ -19,6 +18,11 @@ gem 'unicorn'
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
+end
 
 group :development, :test do
   gem 'annotate'
