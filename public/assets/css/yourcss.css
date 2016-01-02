@@ -1,0 +1,28 @@
+body {
+  font-family: 'Open Sans', 'YuGothic', 'Yu Gothic','游ゴシック','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo' !important;
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  font-family: 'Open Sans', 'YuGothic', 'Yu Gothic','游ゴシック','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo' !important;
+}
+
+
+.portrait .portrait-img-area .profile-links a.github {
+  left: -10px;
+  bottom: 0;
+  background: #2C92AC;
+  color: white;
+}
+
+.box-testimonial a {
+  color: #FFF;
+}
+
+.qualification {
+  color: #FFF;
+}

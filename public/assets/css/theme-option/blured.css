@@ -1,0 +1,16 @@
+body{
+  background: #3a5a75 url(../../images/bg/bg1.jpg) no-repeat center center;
+  -webkit-background-size: cover ;
+  -moz-background-size: cover ;
+  -o-background-size: cover ;
+  background-size: cover ;
+  background-attachment: fixed;
+}
+
+.portrait, .content, #backtotop{
+  box-shadow: 0 0 5px 5px rgba(0,0,0,0.1) !important;
+}
+
+.footer{
+  color: #fff;
+}
