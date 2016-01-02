@@ -211,9 +211,6 @@ GEM
       sexp_processor (~> 4.1)
     sexp_processor (4.6.0)
     slop (3.6.0)
-    spring (1.6.1)
-    spring-commands-rspec (1.0.4)
-      spring (>= 0.9.1)
     sprockets (3.5.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -259,8 +256,6 @@ DEPENDENCIES
   rails (>= 5.0.0.beta1, < 5.1)
   rails_best_practices
   rspec-rails
-  spring
-  spring-commands-rspec
   tzinfo-data
   unicorn
 
