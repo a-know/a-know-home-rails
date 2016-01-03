@@ -36,8 +36,11 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rails_best_practices'
   gem 'rspec-rails'
-  gem 'spring'
-  gem 'spring-commands-rspec'
+end
+
+group :test do
+  gem 'rspec-json_matcher'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

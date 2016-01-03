@@ -3,13 +3,10 @@ $(function(){
     var bukuma_html = "";
     var blog_html = "";
 
-  // for ajax
-    var controll_data = {};
-
   $.ajax({
-        type : 'POST',
-        url : '/getBukuma',
-        data : controll_data,
+        type : 'GET',
+        url : '/bookmarks',
+        data : {},
         cache : false,
         dataType : 'json',
 
@@ -22,7 +19,7 @@ $(function(){
             }else{
               bukuma_html = bukuma_html.concat('<div class="item "><div class="box-testimonial"><div class="oComment">');
             }
-            bukuma_html = bukuma_html.concat('<h5><a href="' + json.entries[i].target_url + '" target="_blank">' + json.entries[i].target_title + '</a> - <a href="' + json.entries[i].hatebu_url + '" target="_blank" style="color:#ff1493; text-decoration:underline;">' + json.entries[i].hatebu_count + 'users</a></h5>');
+            bukuma_html = bukuma_html.concat('<h5><a href="' + json.entries[i].target_url + '" target="_blank">' + json.entries[i].target_title + '</a> - <a href="' + json.entries[i].hatebu_url + '" target="_blank"><img src="http://b.hatena.ne.jp/entry/image/' + json.entries[i].target_url + '" class="bukuma-count-img"></a></h5>');
 
             if(json.entries[i].comment != ''){
                 bukuma_html = bukuma_html.concat('<p>' + json.entries[i].comment + '</p>');
