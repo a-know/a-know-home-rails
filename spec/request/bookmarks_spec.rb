@@ -78,5 +78,9 @@ EOS
           }
         )
     end
+
+    context 'RSS フィードに 10 以上のエントリが含まれる場合' do
+      pending '先頭10件の情報を返すこと'
+    end
   end
 end

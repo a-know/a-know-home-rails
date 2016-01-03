@@ -13,7 +13,9 @@ class BookmarksController < ActionController::API
     rss = RSS::Parser.parse(feed)
 
     render json: { entries: [].tap do |entries|
-      rss.items.each do |item|
+      rss.items.each_with_index do |item, i|
+        break if i > 9
+
         entries << {}.tap do |entry|
           entry[:comment] = trim_newline(item.description)
           entry[:date] = trim_newline(item.date.strftime('%Y-%m-%d-%H'))
