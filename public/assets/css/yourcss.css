@@ -26,3 +26,8 @@ body h6 {
 .qualification {
   color: #FFF;
 }
+
+.bukuma-count-img {
+  width: initial !important;
+  position: initial !important;
+}
