@@ -3,7 +3,8 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require "rspec/json_matcher"
+require 'rspec/json_matcher'
+require 'webmock/rspec'
 RSpec.configuration.include RSpec::JsonMatcher
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -37,4 +38,5 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+  config.include ActiveSupport::Testing::TimeHelpers
 end

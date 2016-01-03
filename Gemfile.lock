@@ -45,6 +45,7 @@ GEM
       method_source
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     annotate (2.6.7)
       activerecord (>= 2.3.0)
       rake (~> 10.4.2, >= 10.4.2)
@@ -93,6 +94,8 @@ GEM
     coffee-script-source (1.10.0)
     colored (1.2)
     concurrent-ruby (1.0.0)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     em-hiredis (0.3.0)
       eventmachine (~> 1.0)
@@ -113,6 +116,7 @@ GEM
       sexp_processor (~> 4.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hashdiff (0.2.3)
     hirb (0.7.3)
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
@@ -213,6 +217,7 @@ GEM
     ruby-progressbar (1.7.5)
     ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
+    safe_yaml (1.0.4)
     sexp_processor (4.6.0)
     slop (3.6.0)
     sprockets (3.5.2)
@@ -236,6 +241,10 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    webmock (1.22.3)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -263,6 +272,7 @@ DEPENDENCIES
   rspec-rails
   tzinfo-data
   unicorn
+  webmock
 
 BUNDLED WITH
    1.11.2
