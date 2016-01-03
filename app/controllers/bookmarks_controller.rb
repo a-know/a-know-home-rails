@@ -15,14 +15,20 @@ class BookmarksController < ActionController::API
     render json: { entries: [].tap do |entries|
       rss.items.each do |item|
         entries << {}.tap do |entry|
-          entry[:comment] = item.description.gsub(/[\r\n]/,"")
-          entry[:date] = item.date.strftime('%Y-%m-%d-%H').gsub(/[\r\n]/,"")
-          entry[:hatebu_url] = "http://b.hatena.ne.jp/entry/#{item.link}".gsub(/[\r\n]/,"")
-          entry[:target_title] = item.title.gsub(/[\r\n]/,"")
-          entry[:target_url] = item.link.gsub(/[\r\n]/,"")
+          entry[:comment] = trim_newline(item.description)
+          entry[:date] = trim_newline(item.date.strftime('%Y-%m-%d-%H'))
+          entry[:hatebu_url] = trim_newline("http://b.hatena.ne.jp/entry/#{item.link}")
+          entry[:target_title] = trim_newline(item.title)
+          entry[:target_url] = trim_newline(item.link)
         end
       end
     end }
 
+  end
+
+  private
+
+  def trim_newline(str)
+    str.gsub(/[\r\n]/,"")
   end
 end

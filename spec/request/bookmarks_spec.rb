@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'bookmarks', type: :request do
-  let(:time_current) { Time.zone.parse('2014-10-01 12:00:00 UTC') }
   let(:feed_xml) { <<EOS }
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:opensearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#" xmlns:media="http://search.yahoo.com/mrss">
 <channel rdf:about="http://b.hatena.ne.jp/a-know/">
@@ -50,16 +49,14 @@ EOS
   subject { get '/bookmarks' }
 
   before do
-    travel_to(time_current)
-    stub_request(:get, "http://b.hatena.ne.jp/a-know/rss").
-      to_return(:body => feed_xml)
+    stub_request(:get, "http://b.hatena.ne.jp/a-know/rss").to_return(:body => feed_xml)
+    subject
   end
 
   describe 'GET /bookmarks' do
-    it { subject; expect(response.status).to eq 200 }
-    it { subject; expect(response.body).to be_json }
+    it { expect(response.status).to eq 200 }
+    it { expect(response.body).to be_json }
     it do
-      subject
       expect(response.body).to be_json_as(
           {
             entries: [
