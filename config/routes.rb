@@ -5,7 +5,7 @@
 #
 
 Rails.application.routes.draw do
-  get 'knock' => 'knock#notify'
+  post 'knock' => 'knock#notify'
 
   get 'bookmarks' => 'bookmarks#index'
 

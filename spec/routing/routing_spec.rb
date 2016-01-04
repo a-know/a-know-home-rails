@@ -8,8 +8,8 @@ RSpec.describe 'routing to bookmarks', type: :routing do
 end
 
 RSpec.describe 'routing to knock', type: :routing do
-  it 'get /knock to knock#notify' do
-    expect(get: '/knock').
+  it 'post /knock to knock#notify' do
+    expect(post: '/knock').
       to route_to(controller: 'knock', action: 'notify')
   end
 end
