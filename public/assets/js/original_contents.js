@@ -3,6 +3,22 @@ $(function(){
     var bukuma_html = "";
     var blog_html = "";
 
+  // visitor notify
+  $.ajax({
+        type : 'POST',
+        url : '/knock',
+        data : {},
+        cache : false,
+        dataType : 'json',
+
+        success : function(json) {
+          // no operation
+        },
+        complete : function() {
+          // no operation
+        }
+    });
+
   $.ajax({
         type : 'GET',
         url : '/bookmarks',
