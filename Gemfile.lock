@@ -114,6 +114,8 @@ GEM
     flay (2.6.1)
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.0)
+    fluent-logger (0.5.1)
+      msgpack (>= 0.4.4, < 0.6.0, != 0.5.3, != 0.5.2, != 0.5.1, != 0.5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashdiff (0.2.3)
@@ -135,6 +137,7 @@ GEM
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
+    msgpack (0.5.12)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.1)
@@ -259,6 +262,7 @@ DEPENDENCIES
   capistrano3-unicorn
   factory_girl_rails
   flay
+  fluent-logger
   hirb
   hirb-unicode
   metric_fu-Saikuro
