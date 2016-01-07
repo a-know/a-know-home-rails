@@ -5,6 +5,14 @@ class KnockController < ApplicationController
           else
             Fluent::Logger::FluentLogger.new('knock')
           end
-    log.post('slack', { message: "Visitor Incoming!!\nUA : #{params['user_agent']}\nLanguage : #{params['language']}" })
+    log.post('slack',
+      {
+        message: [
+          "Visitor Incoming!!",
+          "UA : #{params['user_agent']}",
+          "Language : #{params['language']}"
+        ].join("\n")
+      }
+    )
   end
 end
