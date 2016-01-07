@@ -7,7 +7,7 @@ $(function(){
   $.ajax({
         type : 'POST',
         url : '/knock',
-        data : {},
+        data : { 'user_agent' : navigator.userAgent, 'language' : navigator.language },
         cache : false,
         dataType : 'json',
 
