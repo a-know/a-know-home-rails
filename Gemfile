@@ -10,6 +10,7 @@ gem 'fluent-logger'
 gem 'puma'
 gem 'rack-heartbeat'
 gem 'unicorn'
+gem 'unicorn-worker-killer'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
