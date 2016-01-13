@@ -13,6 +13,6 @@ class KnockController < ApplicationController
           "Language : #{params['language']}"
         ].join("\n")
       }
-    )
+    ) unless params['admin']
   end
 end
