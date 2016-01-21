@@ -142,7 +142,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.0.2)
-    nokogiri (1.6.7.1)
+    nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -270,6 +270,7 @@ DEPENDENCIES
   hirb
   hirb-unicode
   metric_fu-Saikuro
+  nokogiri (>= 1.6.7.2)
   pry-byebug
   pry-rails
   puma
