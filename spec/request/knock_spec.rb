@@ -31,7 +31,21 @@ RSpec.describe '/knock', type: :request do
         {
           user_agent: 'USER_AGENT_STRING',
           language: 'LANGUAGE_STRING',
-          admin: true,
+          admin: 'true',
+        }
+      end
+
+      it 'should not post fluent_logger' do
+        expect(fluent_logger).to_not receive(:post)
+        subject
+      end
+    end
+
+    context 'user_agent includes `bot.html`' do
+      let(:params) do
+        {
+          user_agent: 'USER_AGEbot.htmlNT_STRING',
+          language: 'LANGUAGE_STRING',
         }
       end
 
