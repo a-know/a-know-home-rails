@@ -6,6 +6,7 @@ gem 'rails', '>= 5.0.0.beta1', '< 5.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.0'
 # Use Puma as the app server
+gem 'dotenv-rails'
 gem 'fluent-logger'
 gem 'puma'
 gem 'rack-heartbeat'
