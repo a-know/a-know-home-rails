@@ -7,6 +7,7 @@ gem 'rails', '~> 5.0.0.beta1.1'
 # gem 'jbuilder', '~> 2.0'
 # Use Puma as the app server
 gem 'dotenv-rails'
+gem 'ltsv_log_formatter'
 gem 'fluent-logger'
 gem 'puma'
 gem 'rack-heartbeat'
