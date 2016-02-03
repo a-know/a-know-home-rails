@@ -136,6 +136,7 @@ GEM
     kgio (2.10.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    ltsv_log_formatter (0.0.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -275,6 +276,7 @@ DEPENDENCIES
   fluent-logger
   hirb
   hirb-unicode
+  ltsv_log_formatter
   metric_fu-Saikuro
   nokogiri (>= 1.6.7.2)
   pry-byebug
