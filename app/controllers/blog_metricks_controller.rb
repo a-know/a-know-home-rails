@@ -17,4 +17,7 @@ class BlogMetricksController < ActionController::API
       }
     )
   end
+
+  def count_subscribers
+  end
 end

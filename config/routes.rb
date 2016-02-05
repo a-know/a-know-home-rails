@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # collect blog metricks
   get '/blog_metricks/bookmarks' => 'blog_metricks#count_bookmarks'
+  get '/blog_metricks/subscribers' => 'blog_metricks#count_subscribers'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
