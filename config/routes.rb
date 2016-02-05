@@ -1,9 +1,10 @@
 # == Route Map
 #
-#                  Prefix Verb URI Pattern                        Controller#Action
-#                   knock POST /knock(.:format)                   knock#notify
-#               bookmarks GET  /bookmarks(.:format)               bookmarks#index
-# blog_metricks_bookmarks GET  /blog_metricks/bookmarks(.:format) blog_metricks#count_bookmarks
+#                    Prefix Verb URI Pattern                          Controller#Action
+#                     knock POST /knock(.:format)                     knock#notify
+#                 bookmarks GET  /bookmarks(.:format)                 bookmarks#index
+#   blog_metricks_bookmarks GET  /blog_metricks/bookmarks(.:format)   blog_metricks#count_bookmarks
+# blog_metricks_subscribers GET  /blog_metricks/subscribers(.:format) blog_metricks#count_subscribers
 #
 
 Rails.application.routes.draw do
