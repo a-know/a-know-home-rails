@@ -1,11 +1,6 @@
-class KnockController < ApplicationController
+class KnockController < SendToFluentController
   def notify
-    log = if Rails.env == 'test'
-            Fluent::Logger::TestLogger.new('knock')
-          else
-            Fluent::Logger::FluentLogger.new('knock')
-          end
-    log.post('slack',
+    fluent_logger('knock').post('slack',
       {
         message: [
           "Visitor Incoming!!",
