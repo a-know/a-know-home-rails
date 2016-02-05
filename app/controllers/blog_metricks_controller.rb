@@ -1,4 +1,4 @@
-class BlogMetricksController < ActionController::API
+class BlogMetricksController < SendToFluentController
   HATEDA_RSS = 'http://d.hatena.ne.jp/a-know/rss'.freeze
   HATEBLO_FEED = 'http://blog.a-know.me/feed'.freeze
   HATEBLO_RSS = 'http://blog.a-know.me/rss'.freeze
@@ -14,16 +14,7 @@ class BlogMetricksController < ActionController::API
 
     bookmark_count = File.basename(image_url).to_i
 
-    logger = if Rails.env == 'test'
-               Fluent::Logger::TestLogger.new('blog-metricks')
-             else
-               Fluent::Logger::FluentLogger.new('blog-metricks')
-             end
-    logger.post('bookmark',
-      {
-        count: bookmark_count
-      }
-    )
+    fluent_logger('blog-metricks').post('bookmark', { count: bookmark_count })
   end
 
   def count_subscribers
@@ -48,12 +39,7 @@ class BlogMetricksController < ActionController::API
                         feedly_hateblo_rss +
                         hateblo_subscribers
 
-    logger = if Rails.env == 'test'
-               Fluent::Logger::TestLogger.new('blog-metricks')
-             else
-               Fluent::Logger::FluentLogger.new('blog-metricks')
-             end
-    logger.post('subscribers',
+    fluent_logger('blog-metricks').post('subscribers',
       {
         total_subscribers: total_subscribers,
         ldr_hateda: ldr_hateda,
