@@ -14,3 +14,10 @@ RSpec.describe 'routing to knock', type: :routing do
   end
 end
 
+RSpec.describe 'routing to count bookmarks', type: :routing do
+  it 'get /blog_metricks/bookmarks to blog_metricks#count_bookmarks' do
+    expect(get: '/blog_metricks/bookmarks').
+      to route_to(controller: 'blog_metricks', action: 'count_bookmarks')
+  end
+end
+
