@@ -57,6 +57,20 @@ class BlogMetricksController < SendToFluentController
     )
   end
 
+  def count_hatena_stars
+    return unless every_15min?
+
+    blog_star_count  = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://blog.a-know.me/'))))['star_count']
+    photo_star_count = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://photos.a-know.me/'))))['star_count']
+
+    fluent_logger('blog-metricks').post('hatena-star',
+      {
+        blog_star_count: blog_star_count,
+        photo_star_count: photo_star_count,
+      }
+    )
+  end
+
   private
 
   def ldr_check(count)
@@ -65,5 +79,9 @@ class BlogMetricksController < SendToFluentController
 
   def feedly_target(rss_url)
     'http://cloud.feedly.com/v3/feeds/' + URI.escape("feed/#{rss_url}", ':/')
+  end
+
+  def hatena_star_count(url)
+    'http://s.hatena.com/blog.json?uri=' + URI.escape(url, ':/')
   end
 end
