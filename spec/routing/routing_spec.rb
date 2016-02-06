@@ -28,3 +28,10 @@ RSpec.describe 'routing to count subscribers', type: :routing do
   end
 end
 
+RSpec.describe 'routing to count hatena-star', type: :routing do
+  it 'get /blog_metricks/hatena_stars to blog_metricks#count_hatena_stars' do
+    expect(get: '/blog_metricks/hatena_stars').
+      to route_to(controller: 'blog_metricks', action: 'count_hatena_stars')
+  end
+end
+

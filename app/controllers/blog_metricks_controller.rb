@@ -57,6 +57,9 @@ class BlogMetricksController < SendToFluentController
     )
   end
 
+  def count_hatena_stars
+  end
+
   private
 
   def ldr_check(count)
