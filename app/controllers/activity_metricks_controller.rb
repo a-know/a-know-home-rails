@@ -1,5 +1,3 @@
-require 'fitbit'
-
 class ActivityMetricksController < SendToFluentController
   def collect_steps
     return if send_fitbit_timing?
