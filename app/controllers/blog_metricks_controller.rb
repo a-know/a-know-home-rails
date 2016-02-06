@@ -8,6 +8,8 @@ class BlogMetricksController < SendToFluentController
   DUMMY_UA = 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01'
 
   def count_bookmarks
+    return unless every_15min?
+
     response_header = `curl -i -A '#{DUMMY_UA}' http://b.hatena.ne.jp/bc/gr/http://blog.a-know.me/`
     response_header =~ /Location: (.+)\r\n/
     image_url = $1
@@ -18,6 +20,8 @@ class BlogMetricksController < SendToFluentController
   end
 
   def count_subscribers
+    return unless every_15min?
+
     ldr_hateda = ldr_check(Net::HTTP.get(URI.parse(LDR_ENDPOINT + HATEDA_RSS)).to_i)
     ldr_hateblo_feed = ldr_check(Net::HTTP.get(URI.parse(LDR_ENDPOINT + HATEBLO_FEED)).to_i)
     ldr_hateblo_rss  = ldr_check(Net::HTTP.get(URI.parse(LDR_ENDPOINT + HATEBLO_RSS)).to_i)

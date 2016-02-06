@@ -45,10 +45,24 @@ RSpec.describe '/blog_metricks/bookmarks', type: :request do
 
     subject { get path }
 
-    it '204' do
-      expect(fluent_logger).to receive(:post).with('bookmark', { count: 1489 })
-      subject
-      expect(response.status).to eq 204
+    context '15分刻みのタイミングのとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:30:45 JST')) }
+
+      it 'fluentd に投げて 204 を返す' do
+        expect(fluent_logger).to receive(:post).with('bookmark', { count: 1489 })
+        subject
+        expect(response.status).to eq 204
+      end
+    end
+
+    context '15分刻みのタイミングではないとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:50:55 JST')) }
+
+      it 'fluentd には投げずに 204 を返す' do
+        expect(fluent_logger).to_not receive(:post)
+        subject
+        expect(response.status).to eq 204
+      end
     end
   end
 
@@ -192,21 +206,33 @@ EOS
 
     subject { get path }
 
-    it '204' do
-      expect_hash = {
-        total_subscribers: 10, # 0 + 0 + 1 + 2 + 2 + 2 + 3
-        ldr_hateda: 0,
-        ldr_hateblo_feed: 0,
-        ldr_hateblo_rss: 1,
-        feedly_hateda: 2,
-        feedly_hateblo_feed: 2,
-        feedly_hateblo_rss: 2,
-        hateblo_subscribers: 3,
-      }
-      expect(fluent_logger).to receive(:post).
-        with('subscribers', expect_hash)
-      subject
-      expect(response.status).to eq 204
+    context '15分刻みのタイミングのとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:30:45 JST')) }
+      it 'fluentd に投げて 204 を返す' do
+        expect_hash = {
+          total_subscribers: 10, # 0 + 0 + 1 + 2 + 2 + 2 + 3
+          ldr_hateda: 0,
+          ldr_hateblo_feed: 0,
+          ldr_hateblo_rss: 1,
+          feedly_hateda: 2,
+          feedly_hateblo_feed: 2,
+          feedly_hateblo_rss: 2,
+          hateblo_subscribers: 3,
+        }
+        expect(fluent_logger).to receive(:post).
+          with('subscribers', expect_hash)
+        subject
+        expect(response.status).to eq 204
+      end
+    end
+
+    context '15分刻みのタイミングではないとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:50:55 JST')) }
+      it 'fluentd には投げずに 204 を返す' do
+        expect(fluent_logger).to_not receive(:post)
+        subject
+        expect(response.status).to eq 204
+      end
     end
   end
 end
