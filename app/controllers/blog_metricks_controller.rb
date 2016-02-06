@@ -71,6 +71,9 @@ class BlogMetricksController < SendToFluentController
     )
   end
 
+  def count_active_visitors
+  end
+
   private
 
   def ldr_check(count)
