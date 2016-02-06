@@ -2,7 +2,7 @@ require 'fitbit'
 
 class ActivityMetricksController < SendToFluentController
   def collect_steps
-    return if send_fitbit_timing?
+    return unless send_fitbit_timing?
 
     fitbit = Fitbit.new unit_system: 'METRIC'
 
