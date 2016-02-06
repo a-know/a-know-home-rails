@@ -235,4 +235,40 @@ EOS
       end
     end
   end
+
+  describe 'GET /blog_metricks/hatena_stars' do
+    let(:path) { "/blog_metricks/hatena_stars" }
+    let(:blog_json)  { '{"count":{"green":8,"blue":1,"red":2,"yellow":"237"},"title":"\u3048\u3044\u306e\u3046\u306b\u3063\u304d","uri":"http://blog.a-know.me/","star_count":123}' }
+    let(:photo_json) { '{"count":{"yellow":"125"},"title":"\u3048\u3044\u306e\u3046\u3075\u3049\u3068","uri":"http://photos.a-know.me/","star_count":456}' }
+
+    before do
+      stub_request(:get, 'http://s.hatena.com/blog.json?uri=http%3A%2F%2Fblog.a-know.me%2F').to_return(:body => blog_json)
+      stub_request(:get, 'http://s.hatena.com/blog.json?uri=http%3A%2F%2Fphotos.a-know.me%2F').to_return(:body => photo_json)
+    end
+
+    subject { get path }
+
+    context '15分刻みのタイミングのとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:30:45 JST')) }
+      it 'fluentd に投げて 204 を返す' do
+        expect_hash = {
+          blog_star_count: 123,
+          photo_star_count: 456,
+        }
+        expect(fluent_logger).to receive(:post).
+          with('hatena-star', expect_hash)
+        subject
+        expect(response.status).to eq 204
+      end
+    end
+
+    context '15分刻みのタイミングではないとき' do
+      before { travel_to(Time.zone.parse('2016-04-01 15:50:55 JST')) }
+      it 'fluentd には投げずに 204 を返す' do
+        expect(fluent_logger).to_not receive(:post)
+        subject
+        expect(response.status).to eq 204
+      end
+    end
+  end
 end
