@@ -1,3 +1,5 @@
+require 'google/api_client'
+
 class BlogMetricksController < SendToFluentController
   HATEDA_RSS = 'http://d.hatena.ne.jp/a-know/rss'.freeze
   HATEBLO_FEED = 'http://blog.a-know.me/feed'.freeze
@@ -67,6 +69,47 @@ class BlogMetricksController < SendToFluentController
       {
         blog_star_count: blog_star_count,
         photo_star_count: photo_star_count,
+      }
+    )
+  end
+
+
+  # see https://github.com/a-know/a-know-dashing/blob/master/jobs/visitor_count_real_time.rb
+  def count_active_visitors
+    # Update these to match your own apps credentials
+    service_account_email = ENV['SERVICE_ACCOUNT_EMAIL'] # Email of service account
+    profile_id = ENV['PROFILE_ID'] # Analytics profile ID.
+
+    # Get the Google API client
+    client = Google::APIClient.new(
+      :application_name => ENV['APPLICATION_NAME'],
+      :application_version => '0.01'
+    )
+
+    key = OpenSSL::PKey::RSA.new(ENV['A_KNOW_GOOGLE_API_KEY'])
+    client.authorization = Signet::OAuth2::Client.new(
+      :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
+      :audience             => 'https://accounts.google.com/o/oauth2/token',
+      :scope                => 'https://www.googleapis.com/auth/analytics.readonly',
+      :issuer               => service_account_email,
+      :signing_key          => key,
+    )
+
+    # Request a token for our service account
+    client.authorization.fetch_access_token!
+
+    # Get the analytics API
+    analytics = client.discovered_api('analytics','v3')
+
+    # Execute the query, get the value `[["1"]]`
+    response = client.execute(:api_method => analytics.data.realtime.get, :parameters => {
+      'ids' => "ga:" + profile_id,
+      'metrics' => "ga:activeVisitors",
+    }).data.rows
+
+    fluent_logger('blog-metricks').post('active-visitors',
+      {
+        number: response.first.first.to_i,
       }
     )
   end
