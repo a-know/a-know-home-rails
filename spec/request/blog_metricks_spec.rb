@@ -271,4 +271,8 @@ EOS
       end
     end
   end
+
+  describe 'GET /blog_metricks/active_visitors' do
+    pending 'Google Analytics API をリクエストし、リアルタイムで訪問者数を取得、fluentd に送る'
+  end
 end
