@@ -107,9 +107,11 @@ class BlogMetricksController < SendToFluentController
       'metrics' => "ga:activeVisitors",
     }).data.rows
 
+    number = response.empty? ? 0 : response.first.first.to_i
+
     fluent_logger('blog-metricks').post('active-visitors',
       {
-        number: response.first.first.to_i,
+        number: number,
       }
     )
   end
