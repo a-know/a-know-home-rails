@@ -34,4 +34,11 @@ RSpec.describe 'Routes', type: :routing do
         to route_to(controller: 'blog_metricks', action: 'count_active_visitors')
     end
   end
+
+  describe 'for a-know-metricks' do
+    it 'get /a_know_metricks/steps to activity_metricks#collect_steps' do
+      expect(get: '/a_know_metricks/steps').
+        to route_to(controller: 'activity_metricks', action: 'collect_steps')
+    end
+  end
 end
