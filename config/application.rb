@@ -29,5 +29,7 @@ module AKnowHome
 
     config.logger = ActiveSupport::Logger.new("log/#{Rails.env}.log")
     config.logger.formatter = LtsvLogFormatter.new
+
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
