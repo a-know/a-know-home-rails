@@ -33,7 +33,7 @@ class BlogMetricksController < SendToFluentController
     feedly_hateblo_feed = JSON.parse(Net::HTTP.get(URI.parse(feedly_target(HATEBLO_FEED))))['subscribers']
     feedly_hateblo_rss  = JSON.parse(Net::HTTP.get(URI.parse(feedly_target(HATEBLO_RSS))))['subscribers']
 
-    hateblo_subscribers_response = `curl -A '#{DUMMY_UA}' http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe`
+    hateblo_subscribers_response = Net::HTTP.get(URI.parse('http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe'))
     hateblo_subscribers_response =~ /data-subscribers-count="(\d+)"/
     hateblo_subscribers = $1.to_i
 

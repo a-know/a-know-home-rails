@@ -199,9 +199,7 @@ EOS
       stub_request(:get, 'http://cloud.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fd.hatena.ne.jp%2Fa-know%2Frss').to_return(:body => feedly_json)
       stub_request(:get, 'http://cloud.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fblog.a-know.me%2Ffeed').to_return(:body => feedly_json)
       stub_request(:get, 'http://cloud.feedly.com/v3/feeds/feed%2Fhttp%3A%2F%2Fblog.a-know.me%2Frss').to_return(:body => feedly_json)
-      allow_any_instance_of(Kernel).to receive(:`).
-        with("curl -A 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01' http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe").
-        and_return(hateblo_subscribers_button)
+      stub_request(:get, 'http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe').to_return(:body => hateblo_subscribers_button)
     end
 
     subject { get path }
