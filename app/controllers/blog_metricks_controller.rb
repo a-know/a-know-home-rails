@@ -1,6 +1,8 @@
 require 'google/api_client'
+require 'rexml/document'
 
 class BlogMetricksController < SendToFluentController
+  BLOG_URL = 'http://blog.a-know.me/'.freeze
   HATEDA_RSS = 'http://d.hatena.ne.jp/a-know/rss'.freeze
   HATEBLO_FEED = 'http://blog.a-know.me/feed'.freeze
   HATEBLO_RSS = 'http://blog.a-know.me/rss'.freeze
@@ -12,11 +14,18 @@ class BlogMetricksController < SendToFluentController
   def count_bookmarks
     return unless every_15min?
 
-    response_header = `curl -i -A '#{DUMMY_UA}' http://b.hatena.ne.jp/bc/gr/http://blog.a-know.me/`
-    response_header =~ /Location: (.+)\r\n/
-    image_url = $1
+    response = Net::HTTP.new('b.hatena.ne.jp').start do |http|
+      request = "<?xml version=\"1.0\"?>\n<methodCall>\n  <methodName>bookmark.getTotalCount</methodName>\n  <params>\n    <param>\n      <value><string>#{BLOG_URL}</string></value>\n    </param>\n  </params>\n</methodCall>"
+      header = {
+        'Content-Type'   => 'text/xml; charset=utf-8',
+        'Content-Length' => request.bytesize.to_s,
+        'User-Agent'     => DUMMY_UA,
+      }
+      http.request_post('/xmlrpc', request, header)
+    end
 
-    bookmark_count = File.basename(image_url).to_i
+    doc = REXML::Document.new(response.body)
+    bookmark_count = doc.elements['/methodResponse/params/param/value/int'].text.to_i
 
     fluent_logger('blog-metricks').post('bookmark', { count: bookmark_count })
   end
@@ -62,7 +71,7 @@ class BlogMetricksController < SendToFluentController
   def count_hatena_stars
     return unless every_15min?
 
-    blog_star_count  = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://blog.a-know.me/'))))['star_count']
+    blog_star_count  = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count(BLOG_URL))))['star_count']
     photo_star_count = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://photos.a-know.me/'))))['star_count']
 
     fluent_logger('blog-metricks').post('hatena-star',
