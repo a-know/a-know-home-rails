@@ -7,7 +7,7 @@ class BlogMetricksController < SendToFluentController
 
   LDR_ENDPOINT = 'http://rpc.reader.livedoor.com/count?feedlink='.freeze
 
-  DUMMY_UA = 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01'
+  DUMMY_UA = 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01'.freeze
 
   def count_bookmarks
     return unless every_15min?
