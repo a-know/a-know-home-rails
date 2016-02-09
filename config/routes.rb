@@ -8,6 +8,7 @@
 #    blog_metricks_hatena_stars GET  /blog_metricks/hatena_stars(.:format)    blog_metricks#count_hatena_stars
 # blog_metricks_active_visitors GET  /blog_metricks/active_visitors(.:format) blog_metricks#count_active_visitors
 #         a_know_metricks_steps GET  /a_know_metricks/steps(.:format)         activity_metricks#collect_steps
+#                   grass_graph GET  /grass-graph(.:format)                   grass_graph#show
 #
 
 Rails.application.routes.draw do
@@ -23,6 +24,9 @@ Rails.application.routes.draw do
 
   # collect a-know metricks
   get '/a_know_metricks/steps' => 'activity_metricks#collect_steps'
+
+  # return a-know contributions graph image
+  get '/grass-graph' => 'grass_graph#show'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

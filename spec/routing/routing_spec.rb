@@ -41,4 +41,11 @@ RSpec.describe 'Routes', type: :routing do
         to route_to(controller: 'activity_metricks', action: 'collect_steps')
     end
   end
+
+  describe 'for grass-graph' do
+    it 'get /grass-graph to grass-graph#show' do
+      expect(get: '/grass-graph').
+        to route_to(controller: 'grass_graph', action: 'show')
+    end
+  end
 end
