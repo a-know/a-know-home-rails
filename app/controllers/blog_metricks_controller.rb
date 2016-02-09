@@ -1,22 +1,41 @@
 require 'google/api_client'
+require 'rexml/document'
 
 class BlogMetricksController < SendToFluentController
+  BLOG_URL = 'http://blog.a-know.me/'.freeze
   HATEDA_RSS = 'http://d.hatena.ne.jp/a-know/rss'.freeze
   HATEBLO_FEED = 'http://blog.a-know.me/feed'.freeze
   HATEBLO_RSS = 'http://blog.a-know.me/rss'.freeze
 
   LDR_ENDPOINT = 'http://rpc.reader.livedoor.com/count?feedlink='.freeze
 
-  DUMMY_UA = 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01'
+  DUMMY_UA = 'Opera/9.80 (Windows NT 5.1; U; ja) Presto/2.7.62 Version/11.01'.freeze
 
   def count_bookmarks
     return unless every_15min?
 
-    response_header = `curl -i -A '#{DUMMY_UA}' http://b.hatena.ne.jp/bc/gr/http://blog.a-know.me/`
-    response_header =~ /Location: (.+)\r\n/
-    image_url = $1
+    response = Net::HTTP.new('b.hatena.ne.jp').start do |http|
+      request = <<EOS
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>bookmark.getTotalCount</methodName>
+  <params>
+    <param>
+      <value><string>#{BLOG_URL}</string></value>
+    </param>
+  </params>
+</methodCall>
+EOS
+      header = {
+        'Content-Type'   => 'text/xml; charset=utf-8',
+        'Content-Length' => request.bytesize.to_s,
+        'User-Agent'     => DUMMY_UA,
+      }
+      http.request_post('/xmlrpc', request, header)
+    end
 
-    bookmark_count = File.basename(image_url).to_i
+    doc = REXML::Document.new(response.body)
+    bookmark_count = doc.elements['/methodResponse/params/param/value/int'].text.to_i
 
     fluent_logger('blog-metricks').post('bookmark', { count: bookmark_count })
   end
@@ -33,7 +52,7 @@ class BlogMetricksController < SendToFluentController
     feedly_hateblo_feed = JSON.parse(Net::HTTP.get(URI.parse(feedly_target(HATEBLO_FEED))))['subscribers']
     feedly_hateblo_rss  = JSON.parse(Net::HTTP.get(URI.parse(feedly_target(HATEBLO_RSS))))['subscribers']
 
-    hateblo_subscribers_response = `curl -A '#{DUMMY_UA}' http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe`
+    hateblo_subscribers_response = Net::HTTP.get(URI.parse('http://blog.hatena.ne.jp/a-know/a-know.hateblo.jp/subscribe/iframe'))
     hateblo_subscribers_response =~ /data-subscribers-count="(\d+)"/
     hateblo_subscribers = $1.to_i
 
@@ -62,7 +81,7 @@ class BlogMetricksController < SendToFluentController
   def count_hatena_stars
     return unless every_15min?
 
-    blog_star_count  = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://blog.a-know.me/'))))['star_count']
+    blog_star_count  = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count(BLOG_URL))))['star_count']
     photo_star_count = JSON.parse(Net::HTTP.get(URI.parse(hatena_star_count('http://photos.a-know.me/'))))['star_count']
 
     fluent_logger('blog-metricks').post('hatena-star',
