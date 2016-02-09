@@ -15,7 +15,17 @@ class BlogMetricksController < SendToFluentController
     return unless every_15min?
 
     response = Net::HTTP.new('b.hatena.ne.jp').start do |http|
-      request = "<?xml version=\"1.0\"?>\n<methodCall>\n  <methodName>bookmark.getTotalCount</methodName>\n  <params>\n    <param>\n      <value><string>#{BLOG_URL}</string></value>\n    </param>\n  </params>\n</methodCall>"
+      request = <<EOS
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>bookmark.getTotalCount</methodName>
+  <params>
+    <param>
+      <value><string>#{BLOG_URL}</string></value>
+    </param>
+  </params>
+</methodCall>
+EOS
       header = {
         'Content-Type'   => 'text/xml; charset=utf-8',
         'Content-Length' => request.bytesize.to_s,
