@@ -220,7 +220,7 @@ a:hover {
 ================================================*/
 
 .intro {
-    padding: 200px 0;
+    padding: 50px 0;
     color: white;
 }
 .intro .countdown span {
@@ -278,7 +278,7 @@ a:hover {
 .intro .subscribe .valid i {
     padding-right: .5em;
 }
-.intro .subscribe #mc-form i.fa-envelope-square {
+.intro .subscribe #mc-form i.fa-github-alt {
     color: #8BC34A;
     position: absolute;
     left: 15px;
