@@ -96,7 +96,7 @@ ol {
     margin: 0;
 }
 .section-padding {
-    padding: 150px 0;
+    padding: 50px 0;
 }
 a,
 a:active,
@@ -310,12 +310,12 @@ a:hover {
 .about {
     position: relative;
     background: #8BC34A;
-    padding: 80px 0;
+    padding: 20px 0;
 }
 .about h2 {
     text-align: center;
     color: #fff;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 600;
 }
 .about h2 small {
@@ -468,13 +468,13 @@ a:hover {
 ================================================*/
 
 .footer {
-    background: #101010;
-    padding: 80px 0;
+    background: #094429;
+    padding: 50px 0;
     text-align: center;
 }
 .footer img {
     display: block;
-    width: 150px;
+    width: 50px;
     margin: 0 auto;
 }
 .footer p {
