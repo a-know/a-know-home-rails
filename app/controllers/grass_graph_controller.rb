@@ -27,6 +27,10 @@ class GrassGraphController < ActionController::API
     send_data png_data, :type => 'image/png', :disposition => 'inline'
   end
 
+  def service
+
+  end
+
   private
 
   def integer_string?(str)
