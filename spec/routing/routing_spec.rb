@@ -42,10 +42,18 @@ RSpec.describe 'Routes', type: :routing do
     end
   end
 
-  describe 'for grass-graph' do
+  describe 'for my grass-graph' do
     it 'get /grass-graph to grass-graph#show' do
       expect(get: '/grass-graph').
         to route_to(controller: 'grass_graph', action: 'show')
+    end
+  end
+
+  describe 'for grass-graph service' do
+    let(:github_id) { 'a-know' }
+    it 'get /images/:github_id to grass-graph#service' do
+      expect(get: "/images/#{github_id}").
+        to route_to(controller: 'grass_graph', action: 'service', github_id: 'a-know')
     end
   end
 end
