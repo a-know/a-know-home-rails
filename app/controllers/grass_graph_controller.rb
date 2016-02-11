@@ -24,7 +24,7 @@ class GrassGraphController < ActionController::API
   end
 
   def extract_svg(github_id)
-    unless ( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
+    while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
       `curl https://github.com/#{github_id} | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | \
       sed -e 's@<svg@<svg xmlns="http://www.w3.org/2000/svg"@' > #{tmpfile_path(github_id)}`
     end
