@@ -1,5 +1,5 @@
 /*====================================
-	Theme: Rewind - Coming Soon Page 
+	Theme: Rewind - Coming Soon Page
 	Author: appengg.com
 	Version: 1.0.2
 ======================================*/
@@ -40,7 +40,7 @@ h5 {
     font-size: 18px;
 }
 .btn {
-    background-color: #f1c40f;
+    background-color: #8BC34A;
     color: #fff;
     font-size: 18px;
     font-weight: 500;
@@ -56,7 +56,7 @@ h5 {
     color: #fff;
 }
 .lg-btn {
-    background-color: #f1c40f;
+    background-color: #8BC34A;
     color: #fff;
     font-size: 20px;
     font-weight: 500;
@@ -113,7 +113,7 @@ a:hover {
     font-weight: 300;
 }
 .heading h2 span {
-    color: #f1c40f;
+    color: #8BC34A;
     text-transform: capitalize;
     font-weight: 600;
 }
@@ -136,7 +136,7 @@ a:hover {
     right: 0;
 }
 #home:after {
-    background: linear-gradient(-45deg, #f1c40f 16px, transparent 0), linear-gradient(45deg, #f1c40f 16px, transparent 0);
+    background: linear-gradient(-45deg, #8BC34A 16px, transparent 0), linear-gradient(45deg, #8BC34A 16px, transparent 0);
     background-position: left-bottom;
     background-repeat: repeat-x;
     background-size: 32px 32px;
@@ -200,7 +200,7 @@ a:hover {
 .header .social-icons ul li a:hover,
 .header .social-icons ul li a:active,
 .header .social-icons ul li a:focus {
-    background: #f1c40f;
+    background: #8BC34A;
 }
 @media only screen and (max-width: 768px) {
     .header .social-icons,
@@ -224,7 +224,7 @@ a:hover {
     color: white;
 }
 .intro .countdown span {
-    color: #f1c40f;
+    color: #8BC34A;
     font-weight: 600;
 }
 .intro .intro-heading .tlt {
@@ -279,7 +279,7 @@ a:hover {
     padding-right: .5em;
 }
 .intro .subscribe #mc-form i.fa-envelope-square {
-    color: #f1c40f;
+    color: #8BC34A;
     position: absolute;
     left: 15px;
     top: 13px;
@@ -309,7 +309,7 @@ a:hover {
 
 .about {
     position: relative;
-    background: #f1c40f;
+    background: #8BC34A;
     padding: 80px 0;
 }
 .about h2 {
@@ -334,7 +334,7 @@ a:hover {
 }
 .services .s-content i {
     font-size: 24px;
-    color: #f1c40f;
+    color: #8BC34A;
 }
 .services .s-content h4.s-heading {
     text-transform: capitalize;
@@ -345,7 +345,7 @@ a:hover {
     margin: 0 auto;
     width: 70px;
     height: 1px;
-    background: #f1c40f;
+    background: #8BC34A;
 }
 .services .s-content p.s-text {
     padding-top: 20px;
@@ -406,7 +406,7 @@ a:hover {
 .contact-form label.error {
     margin-bottom: 10px;
     font-weight: 300;
-    color: #f1c40f;
+    color: #8BC34A;
 }
 #contact-form div[class*="for-user-"] {
     position: relative;
@@ -451,7 +451,7 @@ a:hover {
     border-left: none;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    box-shadow: 5px 0 0 0 #f1c40f inset;
+    box-shadow: 5px 0 0 0 #8BC34A inset;
     margin-bottom: 5px;
 }
 .contact-form .form-control.error:focus {
@@ -483,8 +483,8 @@ a:hover {
     color: #fff;
 }
 
-/*============================================= 
-				PRELOADER 
+/*=============================================
+				PRELOADER
 =============================================*/
 
 #preloader {
@@ -493,7 +493,7 @@ a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #f1c40f;
+    background: #8BC34A;
     z-index: 9999;
     height: 100%;
 }
