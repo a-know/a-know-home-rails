@@ -67,16 +67,16 @@
                 </div>
                     <div class="col-md-6 col-md-offset-3">
                         <div class="subscribe">
-                            <form id="mc-form">
+                            <div id="mc-form">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder=" your GitHub ID" id="mc-github-id" required>
                                     <i class="fa fa-github-alt"></i>
                                     <span class="input-group-btn">
-                                        <div class="btn btn-default">Generate Grass-Graph!</div>
+                                        <div class="btn btn-default" id="generate-btn">Generate Grass-Graph!</div>
                                     </span>
                                 </div>
                                 <label for="mc-email" id="mc-notification" style="color: white;"></label>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,8 +105,7 @@
     <section class="services section-padding">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <img src="https://home.a-know.me/grass-graph">
+                <div class="col-sm-8 col-sm-offset-2" id="gg-img-area">
                 </div>
             </div>
         </div>
@@ -117,7 +116,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12" id="copyright">
                     <a href="https://github.com/a-know" target="_blank"><img class="img-responsive" src="images/logo.png" alt="logo"/></a>
                     <p>Copyright &copy; 2016　a-know / shitemil-works All Rights are Reserved.</p>
                 </div>

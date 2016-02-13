@@ -16,8 +16,15 @@ $(document).ready(function() {
 
 });
 
-$("#mc-github-id").on('click blur keydown keyup keypress change',function(){
+$("#mc-github-id").on('blur keydown keyup keypress change',function(){
   var textWrite = $("#mc-github-id").val();
   $("#gg-img-tag").val('<img src="https://grass-graph.shitemil.works/images/' + textWrite + '">');
   $("#gg-img-tag-option").val('<img src="https://grass-graph.shitemil.works/images/' + textWrite + '?rotate=270&width=568&height=88">');
+});
+
+$("#generate-btn").on('click',function(){
+  $("#gg-img-area").empty();
+  var img_element = document.createElement('img');
+  img_element.setAttribute("src", "https://grass-graph.shitemil.works/images/" + $("#mc-github-id").val());
+  $("#gg-img-area").append(img_element);
 });
