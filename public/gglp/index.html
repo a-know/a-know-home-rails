@@ -67,7 +67,7 @@
                         <div class="subscribe">
                             <form id="mc-form">
                                 <div class="input-group">
-                                    <input type="email" class="form-control" placeholder=" your GitHub ID" required id="mc-email">
+                                    <input type="text" class="form-control" placeholder=" your GitHub ID" id="mc-github-id" required>
                                     <i class="fa fa-github-alt"></i>
                                     <span class="input-group-btn">
                                         <button class="btn btn-default">Generate Grass-Graph!</button>
@@ -89,16 +89,15 @@
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <h2 class="description"><small>The below code is your Grass-Graph image tag.</small></h2>
-                    <input type="text" class="form-control" name="name" placeholder='<img src="https://grass-graph.herokuapp.com/images/a-know">' required>
+                    <input type="text" class="form-control" name="gg-img-tag" id="gg-img-tag" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know">' required>
                 </div>
                 <div class="col-sm-8 col-sm-offset-2">
                     <h2 class="description"><small>You can specify the angle and size, to rotate or resize the image.</small></h2>
-                    <input type="text" class="form-control" name="name" placeholder='<img src="https://grass-graph.herokuapp.com/images/a-know?rotate=270&width=568&height=88">' required>
+                    <input type="text" class="form-control" name="gg-img-tag-option" id="gg-img-tag-option" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know?rotate=270&width=568&height=88">' required>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- SERVICES-->
     <section class="services section-padding">
