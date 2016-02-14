@@ -16,20 +16,32 @@ class GrassGraphController < ActionController::API
     send_data png_data, :type => 'image/png', :disposition => 'inline'
   end
 
+  def extract_svg(github_id)
+    retry_count = 0
+    while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
+      page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
+      page_response.gsub!(
+        /^[\s\S]+<svg.+class="js-calendar-graph-svg">/,
+        '<svg xmlns="http://www.w3.org/2000/svg" width="721" height="110" class="js-calendar-graph-svg">')
+      page_response.gsub!(/<\/svg>[\s\S]+\z/, '</svg>')
+      page_response.gsub!('<text', '<text font-family="Helvetica"')
+      begin
+        File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
+      rescue
+        # GitHub の profile ページ取得に失敗するとファイル書き出しにも失敗する
+      ensure
+        retry_count += 1
+        break if retry_count > 5
+      end
+    end
+    File.open(tmpfile_path(github_id)).read
+  end
+
   private
 
   def tmpfile_path(github_id)
     dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
     "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}.svg"
-  end
-
-  def extract_svg(github_id)
-    while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
-      `curl https://github.com/#{github_id} | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | \
-      sed -e 's@<svg@<svg xmlns="http://www.w3.org/2000/svg"@' | \
-      sed -e 's@<text@<text font-family="Helvetica"@' > #{tmpfile_path(github_id)}`
-    end
-    File.open(tmpfile_path(github_id)).read
   end
 
   def integer_string?(str)
