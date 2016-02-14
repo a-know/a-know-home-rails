@@ -17,6 +17,7 @@ class GrassGraphController < ActionController::API
   end
 
   def extract_svg(github_id)
+    retry_count = 0
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
       page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
       page_response.gsub!(
@@ -27,8 +28,10 @@ class GrassGraphController < ActionController::API
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
       rescue
-        # GitHub の profile ページ取得に失敗するとファイル書き出しにも失敗するので、その場合には再試行する
-        next
+        # GitHub の profile ページ取得に失敗するとファイル書き出しにも失敗する
+      ensure
+        retry_count += 1
+        break if retry_count > 5
       end
     end
     File.open(tmpfile_path(github_id)).read
