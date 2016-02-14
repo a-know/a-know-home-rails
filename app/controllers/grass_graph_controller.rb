@@ -16,13 +16,6 @@ class GrassGraphController < ActionController::API
     send_data png_data, :type => 'image/png', :disposition => 'inline'
   end
 
-  private
-
-  def tmpfile_path(github_id)
-    dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
-    "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}.svg"
-  end
-
   def extract_svg(github_id)
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
       `curl https://github.com/#{github_id} | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | \
@@ -30,6 +23,13 @@ class GrassGraphController < ActionController::API
       sed -e 's@<text@<text font-family="Helvetica"@' > #{tmpfile_path(github_id)}`
     end
     File.open(tmpfile_path(github_id)).read
+  end
+
+  private
+
+  def tmpfile_path(github_id)
+    dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
+    "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}.svg"
   end
 
   def integer_string?(str)
