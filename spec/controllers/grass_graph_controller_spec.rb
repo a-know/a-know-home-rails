@@ -9,6 +9,7 @@ RSpec.describe GrassGraphController do
   before do
     Dir.mkdir('tmp/spec') unless File.exists?('tmp/spec')
     File.delete('tmp/spec/test.svg') if File.exists?('tmp/spec/test.svg')
+    stub_request(:get, 'https://github.com/a-know').to_return(:body => File.read('spec/files/page_response.txt'))
   end
 
   after { File.delete('tmp/spec/test.svg') if File.exists?('tmp/spec/test.svg') }

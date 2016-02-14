@@ -18,9 +18,11 @@ class GrassGraphController < ActionController::API
 
   def extract_svg(github_id)
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
-      `curl https://github.com/#{github_id} | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | \
-      sed -e 's@<svg@<svg xmlns="http://www.w3.org/2000/svg"@' | \
-      sed -e 's@<text@<text font-family="Helvetica"@' > #{tmpfile_path(github_id)}`
+      page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
+      page_response.gsub!(/^[\s\S]+<svg.+class="js-calendar-graph-svg">/, '<svg xmlns="http://www.w3.org/2000/svg" width="721" height="110" class="js-calendar-graph-svg">')
+      page_response.gsub!(/<\/svg>[\s\S]+\z/, '</svg>')
+      page_response.gsub!('<text', '<text font-family="Helvetica"')
+      File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
     end
     File.open(tmpfile_path(github_id)).read
   end
