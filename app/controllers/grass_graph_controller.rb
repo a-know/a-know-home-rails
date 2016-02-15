@@ -22,8 +22,10 @@ class GrassGraphController < ActionController::API
       page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
       page_response.gsub!(
         /^[\s\S]+<svg.+class="js-calendar-graph-svg">/,
-        '<svg xmlns="http://www.w3.org/2000/svg" width="721" height="110" class="js-calendar-graph-svg">')
-      page_response.gsub!(/<\/svg>[\s\S]+\z/, '</svg>')
+        '<svg xmlns="http://www.w3.org/2000/svg" width="720" height="135" class="js-calendar-graph-svg">')
+      page_response.gsub!(
+        /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
+        'dy="87" style="display: none;">S</text><text x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="666" y="110">More</text></g></svg>')
       page_response.gsub!('<text', '<text font-family="Helvetica"')
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
@@ -52,11 +54,11 @@ class GrassGraphController < ActionController::API
   end
 
   def generate_png(svg_data, rotate, height, width)
-    png_data = ImageConvert.svg_to_png(svg_data, 720, 115)
+    png_data = ImageConvert.svg_to_png(svg_data, 720, 135)
 
     if rotate || width || height
       width  = width  ? width.to_i : 720
-      height = height ? height.to_i : 115
+      height = height ? height.to_i : 135
 
       image = MiniMagick::Image.read(png_data)
       image.combine_options do |b|
