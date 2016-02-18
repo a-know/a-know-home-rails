@@ -16,11 +16,11 @@ ExceptionNotification.configure do |config|
   # Notifiers =================================================================
 
   # Email notifier sends notifications by email.
-  config.add_notifier :email, {
-    :email_prefix         => "[ERROR] ",
-    :sender_address       => %{"Notifier" <notifier@example.com>},
-    :exception_recipients => %w{exceptions@example.com}
-  }
+  # config.add_notifier :email, {
+  #   :email_prefix         => "[ERROR] ",
+  #   :sender_address       => %{"Notifier" <notifier@example.com>},
+  #   :exception_recipients => %w{exceptions@example.com}
+  # }
 
   # Campfire notifier sends notifications to your Campfire room. Requires 'tinder' gem.
   # config.add_notifier :campfire, {
@@ -41,4 +41,8 @@ ExceptionNotification.configure do |config|
   #   :http_method => :post
   # }
 
+  config.add_notifier :slack, {
+    webhook_url: Rails.application.secrets.slack_webhook_url,
+    channel: '#a-know-home-alert',
+  }
 end
