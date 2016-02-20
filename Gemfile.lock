@@ -50,6 +50,7 @@ GEM
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
     awesome_print (1.6.1)
+    beefcake (1.1.0)
     builder (3.2.2)
     byebug (8.2.2)
     cairo (1.14.3)
@@ -74,6 +75,7 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
+    digest-crc (0.4.1)
     dotenv (2.1.0)
     dotenv-rails (2.1.0)
       dotenv (= 2.1.0)
@@ -98,6 +100,12 @@ GEM
       sexp_processor (~> 4.0)
     fluent-logger (0.5.1)
       msgpack (>= 0.4.4, < 0.6.0, != 0.5.3, != 0.5.2, != 0.5.1, != 0.5.0)
+    gcloud (0.6.1)
+      beefcake (~> 1.0)
+      digest-crc (~> 0.4)
+      google-api-client (~> 0.8.3)
+      mime-types (~> 2.4)
+      zonefile (~> 1.04)
     gdk_pixbuf2 (3.0.7)
       glib2 (= 3.0.7)
     get_process_mem (0.2.0)
@@ -281,6 +289,7 @@ GEM
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    zonefile (1.04)
 
 PLATFORMS
   ruby
@@ -296,6 +305,7 @@ DEPENDENCIES
   fitgem
   flay
   fluent-logger
+  gcloud
   google-api-client (~> 0.8.6)
   hirb
   hirb-unicode
