@@ -48,6 +48,7 @@ class GrassGraphController < ActionController::API
   end
 
   def upload_gcs(github_id, path)
+    return unless Rails.env.production?
     require 'gcloud'
     dir_name = github_id == 'a-know' ? 'my-gg-svg' : nil
     return unless dir_name
