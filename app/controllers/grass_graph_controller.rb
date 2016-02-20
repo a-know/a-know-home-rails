@@ -29,6 +29,7 @@ class GrassGraphController < ActionController::API
       page_response.gsub!('<text', '<text font-family="Helvetica"')
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
+        upload_gcs(github_id, tmpfile_path(github_id))
       rescue
         # GitHub の profile ページ取得に失敗するとファイル書き出しにも失敗する
       ensure
@@ -44,6 +45,15 @@ class GrassGraphController < ActionController::API
   def tmpfile_path(github_id)
     dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
     "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}.svg"
+  end
+
+  def upload_gcs(github_id, path)
+    require 'gcloud'
+    dir_name = github_id == 'a-know' ? 'my-gg-svg' : nil
+    return unless dir_name
+    gcloud = Gcloud.new('a-know-home', Rails.application.secrets.gcp_json_file_path)
+    bucket = gcloud.storage.bucket('gg-on-a-know-home')
+    file = bucket.create_file(path, "#{dir_name}/#{Time.now.strftime('%Y-%m')}/#{File.basename(path)}")
   end
 
   def integer_string?(str)
