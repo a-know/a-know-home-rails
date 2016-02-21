@@ -20,6 +20,7 @@ class GrassGraphController < ActionController::API
     retry_count = 0
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
       page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
+      contributions_info = page_response.scan(%r|<span class="contrib-number">(.+)</span>|) if detail_type?
       page_response.gsub!(
         /^[\s\S]+<svg.+class="js-calendar-graph-svg">/,
         %Q|<svg xmlns="http://www.w3.org/2000/svg" width="720" height="#{svg_height}" class="js-calendar-graph-svg"><rect x="0" y="0" width="720" height="#{svg_height}" fill="white" stroke="none"/>|)
