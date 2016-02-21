@@ -45,6 +45,7 @@ RSpec.describe GrassGraphController do
       it 'detail に適したサイズの宣言が含まれていること' do
         expect(controller.extract_svg(github_id)).to match /translate\(20, 60\)/
         expect(controller.extract_svg(github_id)).to match /width="720" height="375"/
+        expect(controller.extract_svg(github_id)).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 685"/></g></g></svg>|
       end
     end
   end
