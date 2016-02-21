@@ -43,9 +43,17 @@ RSpec.describe GrassGraphController do
       before { allow(controller).to receive(:type).and_return('detail') }
 
       it 'detail に適したサイズの宣言が含まれていること' do
-        expect(controller.extract_svg(github_id)).to match /translate\(15, 60\)/
-        expect(controller.extract_svg(github_id)).to match /width="720" height="375"/
-        expect(controller.extract_svg(github_id)).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 685"/></g></g></svg>|
+        svg = controller.extract_svg(github_id)
+        expect(svg).to match /translate\(15, 60\)/
+        expect(svg).to match /width="720" height="375"/
+        expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 685"/></g>|
+      end
+
+      it 'detail な情報が svg に含まれていること' do
+        svg = controller.extract_svg(github_id)
+        expect(svg).to match %r|<text font-family="Helvetica" x="40" y="150" font-size="15px">Contributions in the last year</text>|
+        expect(svg).to match %r|<text font-family="Helvetica" x="340" y="150" font-size="15px">Longest streak</text>|
+        expect(svg).to match %r|<text font-family="Helvetica" x="560" y="150" font-size="15px">Current streak</text>|
       end
     end
   end
