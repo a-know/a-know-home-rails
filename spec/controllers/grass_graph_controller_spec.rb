@@ -43,6 +43,7 @@ RSpec.describe GrassGraphController do
       before { allow(controller).to receive(:type).and_return('detail') }
 
       it 'detail に適したサイズの宣言が含まれていること' do
+        expect(controller.extract_svg(github_id)).to match /translate\(20, 60\)/
         expect(controller.extract_svg(github_id)).to match /width="720" height="375"/
       end
     end
