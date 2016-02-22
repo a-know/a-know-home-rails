@@ -28,10 +28,11 @@ class GrassGraphController < ActionController::API
         /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
         'dy="87" style="display: none;">S</text><text x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="666" y="110">More</text></g></svg>')
       page_response.gsub!('translate(20, 20)', 'translate(15, 60)') if detail_type?
-      page_response.gsub!('</g></svg>', '<g stroke="gray" stroke-width="1"><path d="M 0 130 H 685"/></g></g></svg>') if detail_type?
+      page_response.gsub!('</g></svg>', '<g stroke="gray" stroke-width="1"><path d="M 0 130 H 700"/></g></g></svg>') if detail_type?
       page_response.gsub!('</g></svg>', '<text x="40" y="150" font-size="15px">Contributions in the last year</text></g></svg>') if detail_type?
-      page_response.gsub!('</g></svg>', '<text x="340" y="150" font-size="15px">Longest streak</text></g></svg>') if detail_type?
-      page_response.gsub!('</g></svg>', '<text x="560" y="150" font-size="15px">Current streak</text></g></svg>') if detail_type?
+      page_response.gsub!('</g></svg>', '<text x="330" y="150" font-size="15px">Longest streak</text></g></svg>') if detail_type?
+      page_response.gsub!('</g></svg>', '<text x="550" y="150" font-size="15px">Current streak</text></g></svg>') if detail_type?
+      page_response.gsub!('</g></svg>', '<g stroke="gray" stroke-width="1"><path d="M 0 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 0 250 H 700"/></g></g></svg>') if detail_type?
       page_response.gsub!('<text', '<text font-family="Helvetica"')
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
