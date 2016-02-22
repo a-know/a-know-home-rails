@@ -53,6 +53,9 @@ RSpec.describe GrassGraphController do
         expect(svg).to match %r|<text font-family="Helvetica" x="40" y="150" font-size="15px">Contributions in the last year</text>|
         expect(svg).to match %r|<text font-family="Helvetica" x="330" y="150" font-size="15px">Longest streak</text>|
         expect(svg).to match %r|<text font-family="Helvetica" x="550" y="150" font-size="15px">Current streak</text>|
+        expect(svg).to match %r|1,498 total|
+        expect(svg).to match %r|43 days|
+        expect(svg).to match %r|42 days|
       end
 
       it 'detail な情報を区別する罫線が含まれていること' do

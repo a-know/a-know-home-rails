@@ -33,6 +33,7 @@ class GrassGraphController < ActionController::API
       page_response.gsub!('</g></svg>', '<text x="330" y="150" font-size="15px">Longest streak</text></g></svg>') if detail_type?
       page_response.gsub!('</g></svg>', '<text x="550" y="150" font-size="15px">Current streak</text></g></svg>') if detail_type?
       page_response.gsub!('</g></svg>', '<g stroke="gray" stroke-width="1"><path d="M 0 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 0 250 H 700"/></g></g></svg>') if detail_type?
+      page_response.gsub!('</g></svg>', %Q|<text x="65" y="200" font-size="30px">#{contributions_info[0].first}</text><text x="330" y="200" font-size="30px">#{contributions_info[1].first}</text><text x="545" y="200" font-size="30px">#{contributions_info[2].first}</text></g></svg>|) if detail_type?
       page_response.gsub!('<text', '<text font-family="Helvetica"')
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
