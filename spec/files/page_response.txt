@@ -5,9 +5,9 @@
 
     <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-d84b52f01022ea5d4ae27f8bafe7b5b2ea8b586653ecfbfbd243ae5558575c4c.css" media="all" rel="stylesheet" />
     <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github2-d6cb042e7d181b6455779d8746fb3b0f1ee958bae4e32e9789f09525b4606efa.css" media="all" rel="stylesheet" />
-    
-    
-    
+
+
+
 
     <link as="script" href="https://assets-cdn.github.com/assets/frameworks-6ca2341c3a095a76515ea4b68fefbd6b078adf1bbedad254b6a5a72f0e396b6d.js" rel="preload" />
     <link as="script" href="https://assets-cdn.github.com/assets/github-006593735c0b9341bd762fb61888ab984ea62f1b803a8af89ba41cccfa106ce3.js" rel="preload" />
@@ -15,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta name="viewport" content="width=1020">
-    
-    
+
+
     <title>a-know (a-know) · GitHub</title>
     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
     <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
@@ -37,9 +37,9 @@
       <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
     <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
     <link rel="assets" href="https://assets-cdn.github.com/">
-    
+
     <meta name="pjax-timeout" content="1000">
-    
+
 
     <meta name="msapplication-TileImage" content="/windows-tile.png">
     <meta name="msapplication-TileColor" content="#ffffff">
@@ -82,13 +82,13 @@
   <body class="logged_out   env-production   page-profile">
     <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
 
-    
-    
-    
 
 
 
-      
+
+
+
+
       <div class="header header-logged-out" role="banner">
   <div class="container clearfix">
 
@@ -148,7 +148,7 @@
     <div role="main" class="main-content">
 
       <div id="js-pjax-container" class="context-loader-container" data-pjax-container>
-        
+
 
 <div class="page-content container">
   <div class="columns profilecols">
@@ -398,7 +398,7 @@
     <div id="contributions-calendar" class="contributions-calendar boxed-group-inner">
       <div class="js-calendar-graph is-graph-loading graph-canvas calendar-graph"
           data-url="/a-know"
-          
+
           >
           <svg width="721" height="110" class="js-calendar-graph-svg">
   <g transform="translate(20, 20)">
@@ -931,7 +931,7 @@
         </div>
         <div class="contrib-column table-column">
           <span class="text-muted">Current streak</span>
-            <span class="contrib-number">43 days</span>
+            <span class="contrib-number">42 days</span>
             <span class="text-muted">
               January 2 &ndash;
               February 13
@@ -941,7 +941,7 @@
   </div>
 
   <div class="activity-listing contribution-activity js-contribution-activity">
-    
+
 <div class="select-menu right js-menu-container js-select-menu js-period-container">
   <button class="btn btn-sm select-menu-button js-menu-target" type="button" aria-haspopup="true">
     <i>Period:</i>
@@ -1179,9 +1179,9 @@
 
 
 
-    
-    
-    
+
+
+
 
     <div id="ajax-error-message" class="ajax-error-message flash flash-error">
       <svg aria-hidden="true" class="octicon octicon-alert" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
@@ -1195,9 +1195,9 @@
       <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/compat-7db58f8b7b91111107fac755dd8b178fe7db0f209ced51fc339c446ad3f8da2b.js"></script>
       <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-6ca2341c3a095a76515ea4b68fefbd6b078adf1bbedad254b6a5a72f0e396b6d.js"></script>
       <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-006593735c0b9341bd762fb61888ab984ea62f1b803a8af89ba41cccfa106ce3.js"></script>
-      
-      
-      
+
+
+
     <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
       <svg aria-hidden="true" class="octicon octicon-alert" height="16" role="img" version="1.1" viewBox="0 0 16 16" width="16"><path d="M15.72 12.5l-6.85-11.98C8.69 0.21 8.36 0.02 8 0.02s-0.69 0.19-0.87 0.5l-6.85 11.98c-0.18 0.31-0.18 0.69 0 1C0.47 13.81 0.8 14 1.15 14h13.7c0.36 0 0.69-0.19 0.86-0.5S15.89 12.81 15.72 12.5zM9 12H7V10h2V12zM9 9H7V5h2V9z"></path></svg>
       <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
