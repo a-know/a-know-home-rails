@@ -61,7 +61,7 @@ RSpec.describe GrassGraphController do
       it 'detail な情報を区別する罫線が含まれていること' do
         svg = controller.extract_svg(github_id)
         expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 700"/></g>|
-        expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 250"/></g><g stroke="gray" stroke-width="1"><path d="M 0 250 H 700"/></g>|
+        expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 0 235 H 700"/></g>|
       end
     end
   end
