@@ -20,13 +20,22 @@ class GrassGraphController < ActionController::API
     retry_count = 0
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
       page_response = Net::HTTP.get(URI.parse("https://github.com/#{github_id}"))
-      contributions_info = page_response.scan(%r|<span class="contrib-number">(.+)</span>|) if detail_type?
+      contributions_info = page_response.scan(%r|<span class="contrib-number">(.+)</span>|)
       page_response.gsub!(
         /^[\s\S]+<svg.+class="js-calendar-graph-svg">/,
         %Q|<svg xmlns="http://www.w3.org/2000/svg" width="720" height="#{svg_height}" class="js-calendar-graph-svg"><rect x="0" y="0" width="720" height="#{svg_height}" fill="white" stroke="none"/>|)
-      page_response.gsub!(
-        /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
-        'dy="87" style="display: none;">S</text><text x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="666" y="110">More</text></g></svg>')
+
+      # Legend
+      if detail_type?
+        page_response.gsub!(
+          /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
+          'dy="87" style="display: none;">S</text><text x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="666" y="110">More</text></g></svg>')
+      else
+        page_response.gsub!(
+          /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
+          'dy="87" style="display: none;">S</text><text x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="118" y="110">More</text></g></svg>')
+      end
+
       page_response.gsub!('translate(20, 20)', 'translate(15, 60)') if detail_type?
       page_response.gsub!('</g></svg>', '<g stroke="gray" stroke-width="1"><path d="M 0 130 H 700"/></g></g></svg>') if detail_type?
       page_response.gsub!('</g></svg>', '<text x="40" y="150" font-size="15px">Contributions in the last year</text></g></svg>') if detail_type?

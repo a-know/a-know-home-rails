@@ -36,6 +36,11 @@ RSpec.describe GrassGraphController do
           expect(controller).to receive(:upload_gcs).with(github_id, dummy_tmpfile)
           expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
         end
+
+        it '凡例の位置が左下であること' do
+          svg = controller.extract_svg(github_id)
+          expect(svg).to include %Q|<text font-family="Helvetica" x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="118" y="110">More</text>|
+        end
       end
     end
 
@@ -62,6 +67,11 @@ RSpec.describe GrassGraphController do
         svg = controller.extract_svg(github_id)
         expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 700"/></g>|
         expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 0 235 H 700"/></g>|
+      end
+
+      it '凡例の位置が右下であること' do
+        svg = controller.extract_svg(github_id)
+        expect(svg).to include %Q|<text font-family="Helvetica" x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="666" y="110">More</text>|
       end
     end
   end
