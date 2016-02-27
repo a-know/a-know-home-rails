@@ -41,6 +41,11 @@ RSpec.describe GrassGraphController do
           svg = controller.extract_svg(github_id)
           expect(svg).to include %Q|<text font-family="Helvetica" x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="118" y="110">More</text>|
         end
+
+        it 'Current streak の情報だけ、右下に表示されていること' do
+          svg = controller.extract_svg(github_id)
+          expect(svg).to include %Q|<text x="620" y="110" font-size="18px">42 days</text>|
+        end
       end
     end
 

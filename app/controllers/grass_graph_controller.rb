@@ -51,7 +51,11 @@ class GrassGraphController < ActionController::API
       page_response.gsub!('<text', '<text font-family="Helvetica"')
 
       # insert detail
-      page_response.gsub!('</g></svg>', %Q|<text x="65" y="200" font-size="30px">#{contributions_info[0].first}</text><text x="330" y="200" font-size="30px">#{contributions_info[1].first}</text><text x="545" y="200" font-size="30px">#{contributions_info[2].first}</text></g></svg>|) if detail_type?
+      if detail_type?
+        page_response.gsub!('</g></svg>', %Q|<text x="65" y="200" font-size="30px">#{contributions_info[0].first}</text><text x="330" y="200" font-size="30px">#{contributions_info[1].first}</text><text x="545" y="200" font-size="30px">#{contributions_info[2].first}</text></g></svg>|)
+      else
+        page_response.gsub!('</g></svg>', %Q|<text x="620" y="110" font-size="18px">#{contributions_info[2].first}</text></g></svg>|)
+      end
 
       begin
         File.open(tmpfile_path(github_id), 'w') { |f| f.puts page_response }
