@@ -10,3 +10,7 @@ body h5,
 body h6 {
   font-family: 'Open Sans', 'YuGothic', 'Yu Gothic','游ゴシック','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo' !important;
 }
+.my-message > span {
+  font-size: 11px;
+  font-weight: 200;
+}
