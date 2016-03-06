@@ -43,9 +43,15 @@ hr {
 
 .grass-graph-area {
   text-align: center;
-  margin: 10px;
+  margin: 20px;
 }
 
 .portfolio-image {
+  margin: 5px;
+}
+
+.activities-line,
+.achievements-line,
+.education-line {
   margin: 5px;
 }
