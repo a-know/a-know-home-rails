@@ -32,3 +32,8 @@ hr {
 .skill-comment-line {
   margin: 5px 5px 5px 5px;
 }
+
+.grass-graph-area {
+  text-align: center;
+  margin: 10px;
+}
