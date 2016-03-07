@@ -55,3 +55,8 @@ hr {
 .education-line {
   margin: 5px;
 }
+
+.view-more-posts {
+  text-align: center;
+  margin: 15px 0 5px 0;
+}
