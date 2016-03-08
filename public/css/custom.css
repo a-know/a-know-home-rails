@@ -1,0 +1,66 @@
+body {
+  font-family: 'Open Sans', 'YuGothic', 'Yu Gothic','游ゴシック','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo' !important;
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body p {
+  font-family: 'Open Sans', 'YuGothic', 'Yu Gothic','游ゴシック','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ','Meiryo' !important;
+}
+.my-message > span {
+  font-size: 11px;
+  font-weight: 200;
+}
+
+.my-specifics,
+.my-venture {
+  font-size: 11px;
+}
+
+.my-venture > span {
+  font-size: 11px;
+}
+
+.portfolio-details > p {
+  font-size: 11px;
+}
+
+hr {
+  margin: 0;
+}
+
+.portfolio-details > hr {
+  margin: 10px;
+}
+
+.skill-comment-line {
+  margin: 5px 5px 5px 5px;
+}
+
+.grass-graph-area {
+  text-align: center;
+  margin: 20px;
+}
+
+.recent-reading-area {
+  margin: 20px 0 0 20px;
+}
+
+.portfolio-image {
+  margin: 5px;
+}
+
+.activities-line,
+.achievements-line,
+.education-line {
+  margin: 5px;
+}
+
+.view-more-posts {
+  text-align: center;
+  margin: 15px 0 5px 0;
+}
