@@ -6,3 +6,8 @@
 .services.section-padding {
   background-color: #fff;
 }
+
+.gg-img {
+  width: 100%;
+  height: auto;
+}
