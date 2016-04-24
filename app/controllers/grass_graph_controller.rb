@@ -79,12 +79,12 @@ class GrassGraphController < ActionController::API
     case github_id
     when 'a-know'
       dir_name = 'gg_svg'
-      "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+      "./tmp/#{dir_name}/#{github_id}_#{date_string}_#{type}.svg"
     else
       dir_name = 'gg_others_svg'
-      tmp_dirname = "tmp/#{dir_name}/#{Time.now.strftime('%Y-%m-%d')}"
+      tmp_dirname = "tmp/#{dir_name}/#{date_string}"
       Dir.mkdir(tmp_dirname) unless File.exists?(tmp_dirname)
-      "./#{tmp_dirname}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+      "./#{tmp_dirname}/#{github_id}_#{date_string}_#{type}.svg"
     end
   end
 
@@ -92,6 +92,10 @@ class GrassGraphController < ActionController::API
 
   def detail_type?
     type == 'detail'
+  end
+
+  def date_string
+    @date_string ||= Time.now.strftime('%Y-%m-%d')
   end
 
   def svg_height
