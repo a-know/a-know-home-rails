@@ -76,8 +76,16 @@ class GrassGraphController < ActionController::API
   end
 
   def tmpfile_path(github_id)
-    dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
-    "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+    case github_id
+    when 'a-know'
+      dir_name = 'gg_svg'
+      "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+    else
+      dir_name = 'gg_others_svg'
+      tmp_dirname = "tmp/#{dir_name}/#{Time.now.strftime('%Y-%m-%d')}"
+      Dir.mkdir(tmp_dirname) unless File.exists?(tmp_dirname)
+      "./#{tmp_dirname}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+    end
   end
 
   private
