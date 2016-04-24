@@ -83,7 +83,7 @@ class GrassGraphController < ActionController::API
     else
       dir_name = 'gg_others_svg'
       tmp_dirname = "tmp/#{dir_name}/#{date_string}"
-      Dir.mkdir(tmp_dirname) unless File.exists?(tmp_dirname)
+      FileUtils.mkdir_p(tmp_dirname) unless File.exists?(tmp_dirname)
       "./#{tmp_dirname}/#{github_id}_#{date_string}_#{type}.svg"
     end
   end
