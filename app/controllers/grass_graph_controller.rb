@@ -75,6 +75,11 @@ class GrassGraphController < ActionController::API
     params['type'] == 'detail' ? 'detail' : 'graph'
   end
 
+  def tmpfile_path(github_id)
+    dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
+    "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
+  end
+
   private
 
   def detail_type?
@@ -83,11 +88,6 @@ class GrassGraphController < ActionController::API
 
   def svg_height
     detail_type? ? 375 : 135
-  end
-
-  def tmpfile_path(github_id)
-    dir_name = github_id == 'a-know' ? 'gg_svg' : 'gg_others_svg'
-    "./tmp/#{dir_name}/#{github_id}_#{Time.now.strftime('%Y-%m-%d')}_#{type}.svg"
   end
 
   def upload_gcs(github_id, path)

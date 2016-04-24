@@ -15,6 +15,27 @@ RSpec.describe GrassGraphController do
 
   after { File.delete(dummy_tmpfile) if File.exists?(dummy_tmpfile) }
 
+  describe '#tmpfile_path' do
+    before do
+      allow(controller).to receive(:type).and_return('graph')
+      travel_to(Time.zone.parse('2016-04-01 15:30:45 JST'))
+    end
+
+    context '指定された github id が a-know だった場合' do
+      it 'tmp/gg_svg に svg ファイルを作る前提でそのパスを返すこと' do
+        expect(controller.tmpfile_path(github_id)).to eq './tmp/gg_svg/a-know_2016-04-01_graph.svg'
+      end
+    end
+
+    context '指定された github id が a-know 以外だった場合' do
+      let(:github_id)  { 'b-know' }
+
+      it 'tmp/gg_others_svg に svg ファイルを作る前提でそのパスを返すこと' do
+        expect(controller.tmpfile_path(github_id)).to eq './tmp/gg_others_svg/b-know_2016-04-01_graph.svg'
+      end
+    end
+  end
+
   describe '#extract_svg' do
     before do
       allow(controller).to receive(:tmpfile_path).with(github_id).and_return(dummy_tmpfile)
