@@ -76,6 +76,20 @@ RSpec.describe GrassGraphController do
           svg = controller.extract_svg(github_id)
           expect(svg).to include %Q|<text x="620" y="110" font-size="18px">42 days</text>|
         end
+
+        context '不正な GitHub ID が指定されていた場合' do
+          let(:github_id)  { '<github_id>' }
+
+          it 'id:a-know として正常処理を行うこと' do
+            allow(controller).to receive(:tmpfile_path).with('a-know').and_return(dummy_tmpfile)
+            expect(controller).to receive(:upload_gcs).with('a-know', dummy_tmpfile)
+
+            svg = controller.extract_svg(github_id)
+            expect(svg).to eq File.read('spec/files/expect.svg')
+            expect(svg).to include %Q|<text font-family="Helvetica" x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="118" y="110">More</text>|
+            expect(svg).to include %Q|<text x="620" y="110" font-size="18px">42 days</text>|
+          end
+        end
       end
     end
 
