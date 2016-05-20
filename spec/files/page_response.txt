@@ -915,28 +915,6 @@
           <span>More</span>
         </div>
       </div>
-
-        <div class="contrib-column contrib-column-first table-column">
-          <span class="text-muted">Contributions in the last year</span>
-          <span class="contrib-number">1,498 total</span>
-          <span class="text-muted">Feb 13, 2015 &ndash; Feb 13, 2016</span>
-        </div>
-        <div class="contrib-column table-column">
-          <span class="text-muted">Longest streak</span>
-            <span class="contrib-number">43 days</span>
-            <span class="text-muted">
-              January 2 &ndash;
-              February 13
-              </span>
-        </div>
-        <div class="contrib-column table-column">
-          <span class="text-muted">Current streak</span>
-            <span class="contrib-number">42 days</span>
-            <span class="text-muted">
-              January 2 &ndash;
-              February 13
-            </span>
-        </div>
     </div>
   </div>
 
