@@ -34,7 +34,7 @@ class GrassGraphController < ActionController::API
         # Legend
       page_response.gsub!(
         /dy="87" style="display: none;">S<\/text>[\s\S]+<\/g>[\s\S]+<\/svg>[\s\S]+\z/,
-        'dy="87" style="display: none;">S</text><text x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="118" y="110">More</text></g></svg>')
+        'dy="87" style="display: none;">S</text><text x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text x="648" y="110">More</text></g></svg>')
 
       # font-family
       page_response.gsub!('<text', '<text font-family="Helvetica"')
