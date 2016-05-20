@@ -67,14 +67,9 @@ RSpec.describe GrassGraphController do
           expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
         end
 
-        it '凡例の位置が左下であること' do
+        it '凡例の位置が右下であること' do
           svg = controller.extract_svg(github_id)
-          expect(svg).to include %Q|<text font-family="Helvetica" x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="118" y="110">More</text>|
-        end
-
-        it 'Current streak の情報だけ、右下に表示されていること' do
-          svg = controller.extract_svg(github_id)
-          expect(svg).to include %Q|<text x="620" y="110" font-size="18px">42 days</text>|
+          expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
         end
 
         context '不正な GitHub ID が指定されていた場合' do
@@ -86,41 +81,9 @@ RSpec.describe GrassGraphController do
 
             svg = controller.extract_svg(github_id)
             expect(svg).to eq File.read('spec/files/expect.svg')
-            expect(svg).to include %Q|<text font-family="Helvetica" x="5" y="110">Less</text><g transform="translate(39 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(54 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(69 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(84 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(99 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="118" y="110">More</text>|
-            expect(svg).to include %Q|<text x="620" y="110" font-size="18px">42 days</text>|
+            expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
           end
         end
-      end
-    end
-
-    context 'type=detail オプションが指定された場合' do
-      before { allow(controller).to receive(:type).and_return('detail') }
-
-      it 'detail に適したサイズの宣言が含まれていること' do
-        svg = controller.extract_svg(github_id)
-        expect(svg).to match /translate\(15, 60\)/
-        expect(svg).to match /width="720" height="375"/
-      end
-
-      it 'detail な情報が svg に含まれていること' do
-        svg = controller.extract_svg(github_id)
-        expect(svg).to match %r|<text font-family="Helvetica" x="40" y="150" font-size="15px">Contributions in the last year</text>|
-        expect(svg).to match %r|<text font-family="Helvetica" x="330" y="150" font-size="15px">Longest streak</text>|
-        expect(svg).to match %r|<text font-family="Helvetica" x="550" y="150" font-size="15px">Current streak</text>|
-        expect(svg).to match %r|1,498 total|
-        expect(svg).to match %r|43 days|
-        expect(svg).to match %r|42 days|
-      end
-
-      it 'detail な情報を区別する罫線が含まれていること' do
-        svg = controller.extract_svg(github_id)
-        expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 H 700"/></g>|
-        expect(svg).to match %r|<g stroke="gray" stroke-width="1"><path d="M 0 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 270 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 490 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 700 130 V 235"/></g><g stroke="gray" stroke-width="1"><path d="M 0 235 H 700"/></g>|
-      end
-
-      it '凡例の位置が右下であること' do
-        svg = controller.extract_svg(github_id)
-        expect(svg).to include %Q|<text font-family="Helvetica" x="553" y="110">Less</text><g transform="translate(587 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(602 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(617 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(632 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(647 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="666" y="110">More</text>|
       end
     end
   end
