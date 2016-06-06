@@ -111,7 +111,7 @@ GEM
       zonefile (~> 1.04)
     gdk_pixbuf2 (3.0.8)
       glib2 (= 3.0.8)
-    get_process_mem (0.2.0)
+    get_process_mem (0.2.1)
     glib2 (3.0.8)
       pkg-config
     globalid (0.3.6)
@@ -289,7 +289,7 @@ GEM
     unicorn-worker-killer (0.4.4)
       get_process_mem (~> 0)
       unicorn (>= 4, < 6)
-    webmock (2.0.3)
+    webmock (2.1.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
