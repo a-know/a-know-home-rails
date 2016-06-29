@@ -7,3 +7,6 @@ RUN gem install bundler
 ENV APP_HOME /a-know-home
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
+
+ADD Gemfile* $APP_HOME/
+
