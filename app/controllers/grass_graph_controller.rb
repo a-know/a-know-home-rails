@@ -91,7 +91,7 @@ class GrassGraphController < ActionController::API
     gcloud = Gcloud.new('a-know-home', Rails.application.secrets.gcp_json_file_path)
     bucket = gcloud.storage.bucket('gg-on-a-know-home')
 
-    file = bucket.create_file(path, "#{gcs_dir}/#{File.basename(path)}")
+    file = bucket.create_file(path, "#{gcs_dir(github_id)}/#{File.basename(path)}")
   end
 
   def gcs_dir(github_id)
