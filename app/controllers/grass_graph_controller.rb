@@ -87,8 +87,7 @@ class GrassGraphController < ActionController::API
   def upload_gcs(github_id, path)
     return unless Rails.env.production?
     require 'gcloud'
-    dir_name = github_id == 'a-know' ? 'my-gg-svg' : nil
-    return unless dir_name
+    dir_name = github_id == 'a-know' ? 'my-gg-svg' : 'others-gg-svg'
     gcloud = Gcloud.new('a-know-home', Rails.application.secrets.gcp_json_file_path)
     bucket = gcloud.storage.bucket('gg-on-a-know-home')
     file = bucket.create_file(path, "#{dir_name}/#{Time.now.strftime('%Y-%m')}/#{File.basename(path)}")
