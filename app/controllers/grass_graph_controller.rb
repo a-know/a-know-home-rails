@@ -109,7 +109,7 @@ class GrassGraphController < ActionController::API
   end
 
   def date_string(date = nil)
-    date ||= Time.now
+    date ||= now
     @date_string ||= date.strftime('%Y-%m-%d')
   end
 
@@ -132,9 +132,14 @@ class GrassGraphController < ActionController::API
   end
 
   def gcs_dir(github_id, date = nil)
-    date ||= Time.now
+    date ||= now
     initial = github_id[0]
     "gg-svg-data/#{date.strftime('%Y')}/#{date.strftime('%m')}/#{date.strftime('%d')}/#{initial}"
+  end
+
+  def now
+    # against issue #137
+    Time.now - 10.minutes
   end
 
   def integer_string?(str)
