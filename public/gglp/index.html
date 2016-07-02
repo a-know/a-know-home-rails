@@ -97,6 +97,17 @@
                     <h2 class="description"><small>You can specify the angle and size, to rotate or resize the image.</small></h2>
                     <input type="text" class="form-control" name="gg-img-tag-option" id="gg-img-tag-option" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know.png?rotate=270&width=568&height=88">' required>
                 </div>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h2 class="description"><small>In addition, you can request the past graph image with `date` parameter.</small></h2>
+                    <input type="text" class="form-control" name="gg-img-tag-option" id="gg-img-tag-option" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know.png?date=20160701">' required>
+                    <h5 class="description">
+                        <small>
+                            <li>You can get image of since July 1, 2016.</li>
+                            <li>This API can return the image by recreating the cache only if you got the image on the specified day in advance.</li>
+                            <li>Therefore, I recommend you to get graph image everyday.<br>(For example, I embed my graph image tag on my blog visited by at least one visitor everyday. :)</li>
+                        </small>
+                    </h5>
+                </div>
             </div>
         </div>
     </section>
