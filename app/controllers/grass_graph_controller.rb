@@ -2,6 +2,8 @@ require 'rsvg2'
 require 'mini_magick'
 
 class GrassGraphController < ActionController::API
+  class BadDateString < StandardError; end
+
   def show
     svg_data = extract_svg('a-know')
     png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width])
@@ -10,10 +12,40 @@ class GrassGraphController < ActionController::API
   end
 
   def service
-    svg_data = extract_svg(params['github_id'])
-    png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width])
+    begin
+      if params['date']
+        svg_data = past_svg_data(params['github_id'], params['date'])
+      else
+        svg_data = extract_svg(params['github_id'])
+      end
+      png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width])
 
-    send_data png_data, :type => 'image/png', :disposition => 'inline'
+      send_data png_data, :type => 'image/png', :disposition => 'inline'
+    rescue BadDateString
+      head 400
+    rescue
+      head 404
+    end
+  end
+
+  def past_svg_data(github_id, date_str)
+    date = check_date(date_str)
+    path = tmpfile_path(github_id, date)
+
+    unless File.exists?(path)
+      file = bucket.file("#{gcs_dir(github_id, date)}/#{File.basename(path)}")
+      file.download path
+    end
+
+    File.open(path).read
+  end
+
+  def check_date
+    begin
+      Date.strptime(date_str,'%Y%m%d')
+    rescue
+      raise BadDateString
+    end
   end
 
   def extract_svg(github_id)
@@ -57,16 +89,16 @@ class GrassGraphController < ActionController::API
     params['type'] == 'detail' ? 'detail' : 'graph'
   end
 
-  def tmpfile_path(github_id)
+  def tmpfile_path(github_id, date = nil)
     case github_id
     when 'a-know'
       dir_name = 'gg_svg'
-      "./tmp/#{dir_name}/#{github_id}_#{date_string}_#{type}.svg"
+      "./tmp/#{dir_name}/#{github_id}_#{date_string(date)}_#{type}.svg"
     else
       dir_name = 'gg_others_svg'
-      tmp_dirname = "tmp/#{dir_name}/#{date_string}"
+      tmp_dirname = "tmp/#{dir_name}/#{date_string(date)}"
       FileUtils.mkdir_p(tmp_dirname) unless File.exists?(tmp_dirname)
-      "./#{tmp_dirname}/#{github_id}_#{date_string}_#{type}.svg"
+      "./#{tmp_dirname}/#{github_id}_#{date_string(date)}_#{type}.svg"
     end
   end
 
@@ -76,8 +108,9 @@ class GrassGraphController < ActionController::API
     type == 'detail'
   end
 
-  def date_string
-    @date_string ||= Time.now.strftime('%Y-%m-%d')
+  def date_string(date = nil)
+    date ||= Time.now
+    @date_string ||= date.strftime('%Y-%m-%d')
   end
 
   def svg_height
@@ -86,17 +119,22 @@ class GrassGraphController < ActionController::API
 
   def upload_gcs(github_id, path)
     return unless Rails.env.production?
-
-    require 'gcloud'
-    gcloud = Gcloud.new('a-know-home', Rails.application.secrets.gcp_json_file_path)
-    bucket = gcloud.storage.bucket('gg-on-a-know-home')
-
     file = bucket.create_file(path, "#{gcs_dir(github_id)}/#{File.basename(path)}")
   end
 
-  def gcs_dir(github_id)
+  def gcloud
+    require 'gcloud'
+    @gcloud ||= Gcloud.new('a-know-home', Rails.application.secrets.gcp_json_file_path)
+  end
+
+  def bucket
+    @bucket ||= gcloud.storage.bucket('gg-on-a-know-home')
+  end
+
+  def gcs_dir(github_id, date = nil)
+    date ||= Time.now
     initial = github_id[0]
-    "gg-svg-data/#{Time.now.strftime('%Y')}/#{Time.now.strftime('%m')}/#{Time.now.strftime('%d')}/#{initial}"
+    "gg-svg-data/#{date.strftime('%Y')}/#{date.strftime('%m')}/#{date.strftime('%d')}/#{initial}"
   end
 
   def integer_string?(str)
