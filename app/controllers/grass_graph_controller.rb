@@ -40,7 +40,7 @@ class GrassGraphController < ActionController::API
     File.open(path).read
   end
 
-  def check_date
+  def check_date(date_str)
     begin
       Date.strptime(date_str,'%Y%m%d')
     rescue
