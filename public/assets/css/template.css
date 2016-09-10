@@ -1244,13 +1244,12 @@ blockquote:before {
     right: 25px;
     top: 30px;
     z-index: 9998;
-    width: 16px;
+    width: 85px;
     height: 12px;
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
     -webkit-transition: .5s ease-in-out;
             transition: .5s ease-in-out;
-    cursor: pointer;
 }
 
 .show-menu-btn:hover span {
@@ -2035,4 +2034,8 @@ a:focus {
     background: transparent;
     border-color: #ba9d49;
     color: #ba9d49;
+}
+
+.img-shadow {
+  box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.8);
 }
