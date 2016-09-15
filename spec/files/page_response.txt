@@ -886,16 +886,15 @@
       <text x="494" y="-5" class="month">Nov</text>
       <text x="559" y="-5" class="month">Dec</text>
       <text x="611" y="-5" class="month">Jan</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="9" style="display: none;">S</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="22">M</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="35" style="display: none;">T</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="48">W</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="61" style="display: none;">T</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="74">F</text>
-    <text text-anchor="middle" class="wday" dx="-10" dy="87" style="display: none;">S</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="8" style="display: none;">Sun</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="20">Mon</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="32" style="display: none;">Tue</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="44">Wed</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="57" style="display: none;">Thu</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="69">Fri</text>
+    <text text-anchor="start" class="wday" dx="-14" dy="81" style="display: none;">Sat</text>
   </g>
 </svg>
-
       </div>
       <div class="contrib-footer clearfix">
         <div class="left text-muted">
