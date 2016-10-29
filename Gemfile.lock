@@ -64,7 +64,7 @@ GEM
       capistrano (~> 3.1)
       sshkit (~> 1.2)
     capistrano-harrow (0.5.3)
-    capistrano-rails (1.1.8)
+    capistrano-rails (1.2.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
     capistrano3-unicorn (0.2.1)
@@ -239,7 +239,7 @@ GEM
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
-    rspec-json_matcher (0.1.5)
+    rspec-json_matcher (0.1.6)
       awesome_print
       json
     rspec-mocks (3.5.0)
