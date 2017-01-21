@@ -46,8 +46,11 @@ RSpec.describe GrassGraphController do
   end
 
   describe '#extract_svg' do
+    let(:fluent_logger) { double(:fluent_logger) }
+
     before do
       allow(controller).to receive(:tmpfile_path).with(github_id).and_return(dummy_tmpfile)
+      allow(Fluent::Logger::TestLogger).to receive(:new).with('knock').and_return(fluent_logger)
     end
 
     context 'type=graph オプションが指定された場合' do
@@ -63,11 +66,13 @@ RSpec.describe GrassGraphController do
 
       context 'svg 抽出済みのファイルがまだ存在しない場合' do
         it 'public contributions のグラフを svg 形式でファイルに出力したもの（今回新たに取得したもの）の内容を返す・GCS へのアップロードも行う' do
+          expect(fluent_logger).to receive(:post).with('slack', { message: "Grass-Graph Generated!!\nGitHub ID : a-know" })
           expect(controller).to receive(:upload_gcs).with(github_id, dummy_tmpfile)
           expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
         end
 
         it '凡例の位置が右下であること' do
+          expect(fluent_logger).to receive(:post).with('slack', { message: "Grass-Graph Generated!!\nGitHub ID : a-know" })
           svg = controller.extract_svg(github_id)
           expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
         end
@@ -78,6 +83,7 @@ RSpec.describe GrassGraphController do
           it 'id:a-know として正常処理を行うこと' do
             allow(controller).to receive(:tmpfile_path).with('a-know').and_return(dummy_tmpfile)
             expect(controller).to receive(:upload_gcs).with('a-know', dummy_tmpfile)
+            expect(fluent_logger).to receive(:post).with('slack', { message: "Grass-Graph Generated!!\nGitHub ID : <github_id>" })
 
             svg = controller.extract_svg(github_id)
             expect(svg).to eq File.read('spec/files/expect.svg')
