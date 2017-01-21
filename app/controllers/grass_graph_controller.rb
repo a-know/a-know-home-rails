@@ -1,7 +1,7 @@
 require 'rsvg2'
 require 'mini_magick'
 
-class GrassGraphController < ActionController::API
+class GrassGraphController < SendToFluentController
   class BadDateString < StandardError; end
 
   def show
@@ -51,12 +51,16 @@ class GrassGraphController < ActionController::API
   def extract_svg(github_id)
     retry_count = 0
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
+      # ページが取得できたら、その日のリクエストが初めてのユーザーを通知する
+      notify(github_id)
+
       begin
         target_uri = URI.parse("https://github.com/#{github_id}")
       rescue
         github_id = 'a-know'
         target_uri = URI.parse("https://github.com/#{github_id}")
       end
+
       page_response = Net::HTTP.get(target_uri)
       contributions_info = page_response.scan(%r|<span class="contrib-number">(.+)</span>|)
       page_response.gsub!(
@@ -82,6 +86,17 @@ class GrassGraphController < ActionController::API
       end
     end
     File.open(tmpfile_path(github_id)).read
+  end
+
+  def notify(github_id)
+    fluent_logger('knock').post('slack',
+      {
+        message: [
+          "Grass-Graph Generated!!",
+          "GitHub ID : #{github_id}"
+        ].join("\n")
+      }
+    )
   end
 
   # experimental
