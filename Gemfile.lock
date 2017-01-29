@@ -163,6 +163,8 @@ GEM
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     ltsv_log_formatter (1.0.0)
+    mackerel-client (0.2.0)
+      faraday (~> 0.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
     memoist (0.15.0)
@@ -322,6 +324,7 @@ DEPENDENCIES
   hirb
   hirb-unicode
   ltsv_log_formatter
+  mackerel-client
   metric_fu-Saikuro
   mini_magick
   nokogiri (>= 1.6.8)

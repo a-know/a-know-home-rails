@@ -35,6 +35,7 @@ gem 'unicorn-worker-killer'
 group :development do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'mackerel-client'
 end
 
 group :development, :test do
