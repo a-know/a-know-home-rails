@@ -1,7 +1,7 @@
 set :branch, 'master'
 
 set :rails_env, :production
-role :web,    %w{a-know@home.a-know.me}
+role :web,    %w{a-know@blue01 a-know@green01}
 
 namespace :deploy do
   # Mackerel のグラフアノテーションのためにデプロイ開始時間を取得するだけのタスク
@@ -12,8 +12,8 @@ namespace :deploy do
   task :finished do
     deploy_endtime = Time.now.to_i
     annotation = {
-      service: 'home_a-know_me',
-      role: [ 'web' ],
+      service: 'grass-graph',
+      role: [ 'webapp', 'lb' ],
       from: fetch(:deploy_starttime),
       to: deploy_endtime,
       title: 'Application Deployed',

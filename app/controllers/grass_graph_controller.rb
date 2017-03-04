@@ -93,7 +93,8 @@ class GrassGraphController < SendToFluentController
       {
         message: [
           "Grass-Graph Generated!!",
-          "GitHub ID : #{github_id}"
+          "GitHub ID : #{github_id}",
+          "https://github.com/#{github_id}"
         ].join("\n")
       }
     )
