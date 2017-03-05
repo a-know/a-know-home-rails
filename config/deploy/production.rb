@@ -1,7 +1,7 @@
 set :branch, 'master'
 
 set :rails_env, :production
-role :web,    %w{a-know@blue01 a-know@green01}
+role :web,    %w{a-know@blue02 a-know@green02}
 
 namespace :deploy do
   # Mackerel のグラフアノテーションのためにデプロイ開始時間を取得するだけのタスク
