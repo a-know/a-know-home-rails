@@ -3,12 +3,12 @@
 set -ex
 
 cat << EOF >> ~/.ssh/config
-Host blue01
-  HostName 13.113.86.55
+Host blue02
+  HostName 52.198.139.4
   User a-know
 
-Host green01
-  HostName 13.112.11.174
+Host green02
+  HostName 52.199.32.19
   User a-know
 EOF
 
