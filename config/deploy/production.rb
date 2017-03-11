@@ -1,7 +1,15 @@
 set :branch, 'master'
 
 set :rails_env, :production
-role :web,    %w{a-know@blue02 a-know@green02}
+
+def webapp_hosts
+  service_name = 'grass-graph'
+  role_name    = 'webapp'
+  hosts_json = `curl -Ss -XGET "https://mackerel.io/api/v0/hosts?service=#{service_name}&role=#{role_name}" -H 'X-Api-Key:#{ENV['MACKEREL_APIKEY_READONLY']}'`
+  JSON.parse(hosts_json)['hosts'].map{|n| n['name']}
+end
+
+role :web, webapp_hosts
 
 namespace :deploy do
   # Mackerel のグラフアノテーションのためにデプロイ開始時間を取得するだけのタスク
