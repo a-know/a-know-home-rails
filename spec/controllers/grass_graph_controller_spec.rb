@@ -99,6 +99,7 @@ RSpec.describe GrassGraphController do
 
         context '不正な GitHub ID が指定されていた場合' do
           let(:github_id)  { '<github_id>' }
+          before { allow(controller).to receive(:is_regular_users?).with(github_id).and_return(false) }
 
           it 'id:a-know として正常処理を行うこと' do
             allow(controller).to receive(:tmpfile_path).with('a-know').and_return(dummy_tmpfile)
