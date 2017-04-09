@@ -65,16 +65,36 @@ RSpec.describe GrassGraphController do
       end
 
       context 'svg 抽出済みのファイルがまだ存在しない場合' do
-        it 'public contributions のグラフを svg 形式でファイルに出力したもの（今回新たに取得したもの）の内容を返す・GCS へのアップロードも行う' do
-          expect(fluent_logger).to receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
-          expect(controller).to receive(:upload_gcs).with(github_id, dummy_tmpfile)
-          expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
+        context '対象の GitHub ID が常連リストに含まれていない場合' do
+          before { allow(controller).to receive(:is_regular_users?).with('a-know').and_return(false) }
+
+          it 'slackに通知する・public contributions のグラフを svg 形式でファイルに出力したもの（今回新たに取得したもの）の内容を返す・GCS へのアップロードも行う' do
+            expect(fluent_logger).to receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
+            expect(controller).to receive(:upload_gcs).with(github_id, dummy_tmpfile)
+            expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
+          end
+
+          it 'slackに通知する・凡例の位置が右下であること' do
+            expect(fluent_logger).to receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
+            svg = controller.extract_svg(github_id)
+            expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
+          end
         end
 
-        it '凡例の位置が右下であること' do
-          expect(fluent_logger).to receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
-          svg = controller.extract_svg(github_id)
-          expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
+        context '対象の GitHub ID が常連リストに含まれている場合' do
+          before { allow(controller).to receive(:is_regular_users?).with('a-know').and_return(true) }
+
+          it 'slackに通知しない・public contributions のグラフを svg 形式でファイルに出力したもの（今回新たに取得したもの）の内容を返す・GCS へのアップロードも行う' do
+            expect(fluent_logger).to_not receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
+            expect(controller).to receive(:upload_gcs).with(github_id, dummy_tmpfile)
+            expect(controller.extract_svg(github_id)).to eq File.read('spec/files/expect.svg')
+          end
+
+          it 'slackに通知しない・凡例の位置が右下であること' do
+            expect(fluent_logger).to_not receive(:post).with('slack', { message: "GitHub ID : a-know's Grass-Graph Generated!!\nhttps://github.com/a-know" })
+            svg = controller.extract_svg(github_id)
+            expect(svg).to include %Q|<text font-family="Helvetica" x="535" y="110">Less</text><g transform="translate(569 , 0)"><rect class="day" width="11" height="11" y="99" fill="#eeeeee"/></g><g transform="translate(584 , 0)"><rect class="day" width="11" height="11" y="99" fill="#d6e685"/></g><g transform="translate(599 , 0)"><rect class="day" width="11" height="11" y="99" fill="#8cc665"/></g><g transform="translate(614 , 0)"><rect class="day" width="11" height="11" y="99" fill="#44a340"/></g><g transform="translate(629 , 0)"><rect class="day" width="11" height="11" y="99" fill="#1e6823"/></g><text font-family="Helvetica" x="648" y="110">More</text>|
+          end
         end
 
         context '不正な GitHub ID が指定されていた場合' do
