@@ -9,7 +9,7 @@ RSpec.describe '/knock', type: :request do
       allow(Fluent::Logger::TestLogger).to receive(:new).with('knock').and_return(fluent_logger)
     end
 
-    subject { post path, params }
+    subject { post path, params: params }
 
     context 'not specified admin=true' do
       let(:params) do

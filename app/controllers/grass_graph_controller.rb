@@ -51,8 +51,8 @@ class GrassGraphController < SendToFluentController
   def extract_svg(github_id)
     retry_count = 0
     while !( File.exists?(tmpfile_path(github_id)) && File.size(tmpfile_path(github_id)) != 0)
-      # ページが取得できたら、その日のリクエストが初めてのユーザーを通知する
-      notify(github_id)
+      # ページが取得できたら、「その日のリクエストが初めてのユーザー」かつ「常連ユーザーではない場合」に通知する
+      notify(github_id) unless is_regular_users?(github_id)
 
       begin
         target_uri = URI.parse("https://github.com/#{github_id}")
@@ -92,12 +92,15 @@ class GrassGraphController < SendToFluentController
     fluent_logger('knock').post('slack',
       {
         message: [
-          "Grass-Graph Generated!!",
-          "GitHub ID : #{github_id}",
+          "GitHub ID : #{github_id}'s Grass-Graph Generated!!",
           "https://github.com/#{github_id}"
         ].join("\n")
       }
     )
+  end
+
+  def is_regular_users?(github_id)
+    Rails.application.secrets.gg_regular_users.split(',').include?(github_id)
   end
 
   # experimental
