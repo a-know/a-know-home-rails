@@ -92,8 +92,7 @@ class GrassGraphController < SendToFluentController
     fluent_logger('knock').post('slack',
       {
         message: [
-          "Grass-Graph Generated!!",
-          "GitHub ID : #{github_id}",
+          "GitHub ID : #{github_id}'s Grass-Graph Generated!!",
           "https://github.com/#{github_id}"
         ].join("\n")
       }
