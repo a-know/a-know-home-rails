@@ -179,7 +179,7 @@ class GrassGraphController < SendToFluentController
       image.combine_options do |b|
         b.resize "#{width}x#{height}>" if width || height
         b.rotate rotate if rotate && integer_string?(rotate)
-        b.transparent('white') unless background.empty?
+        b.transparent('white') unless background.blank?
       end
       png_data = image.to_blob
     end
