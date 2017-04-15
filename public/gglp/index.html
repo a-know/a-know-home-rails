@@ -92,20 +92,8 @@
                 <div class="col-sm-8 col-sm-offset-2">
                     <h2 class="description"><small>The below code is your Grass-Graph image tag.</small></h2>
                     <input type="text" class="form-control" name="gg-img-tag" id="gg-img-tag" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know.png">' required>
-                </div>
-                <div class="col-sm-8 col-sm-offset-2">
-                    <h2 class="description"><small>You can specify the angle and size, to rotate or resize the image.</small></h2>
-                    <input type="text" class="form-control" name="gg-img-tag-option" id="gg-img-tag-option" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know.png?rotate=270&width=568&height=88">' required>
-                </div>
-                <div class="col-sm-8 col-sm-offset-2">
-                    <h2 class="description"><small>In addition, you can request the past graph image with `date` parameter.</small></h2>
-                    <input type="text" class="form-control" name="gg-img-tag-date-option" id="gg-img-tag-date-option" placeholder='<img src="https://grass-graph.shitemil.works/images/a-know.png?date=20160701">' required>
                     <h5 class="description">
-                        <small>
-                            <li>You can get image of since July 1, 2016.</li>
-                            <li>This API can return the image by recreating the cache only if you got the image on the specified day in advance.</li>
-                            <li>Therefore, I recommend you to get graph image everyday.<br>(For example, I embed my graph image tag on my blog visited by at least one visitor everyday. :)</li>
-                        </small>
+                        <small>Some options can be specified. For details, please check the bottom of the page.</small>
                     </h5>
                 </div>
             </div>
@@ -113,12 +101,60 @@
     </section>
 
     <!-- SERVICES-->
-    <section class="services section-padding">
+    <section id="services" class="services section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2" id="gg-img-area">
                     <img src="https://grass-graph.shitemil.works/images/a-know.png" class="gg-img">
                     <h2 class='description'><small>a-know's GitHub Contributions Grass-Graph</small></h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="options" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <h2 class="description"><small>Options (params)<br>(These options can be used in combination.)</small></h2>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>key</th>
+                                <th>description</th>
+                                <th>example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">rotate</th>
+                                <td>The angle of image (0 - 360).</td>
+                                <td>https://grass-graph.shitemil.works/images/a-know.png?rotate=270</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">width</th>
+                                <td>The width of image.<br>The unit is pixel.</td>
+                                <td>https://grass-graph.shitemil.works/images/a-know.png?width=568</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">height</th>
+                                <td>The height of image.<br>The unit is pixel.</td>
+                                <td>https://grass-graph.shitemil.works/images/a-know.png?height=88</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">date</th>
+                                <td>
+                                  Retrieve the image of the specified date.<br><br>
+                                  This option can return the image by recreating the cache only if you got the image on the specified day in advance.<br>
+                                  Therefore, I recommend you to get graph image everyday.<br>
+                                  (I am embedding image tag in my blog. Because at least one person will visit my blog everyday!)
+                                </td>
+                                <td>https://grass-graph.shitemil.works/images/a-know.png?date=20160701</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
