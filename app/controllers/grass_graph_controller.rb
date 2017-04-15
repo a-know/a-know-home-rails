@@ -6,7 +6,7 @@ class GrassGraphController < SendToFluentController
 
   def show
     svg_data = extract_svg('a-know')
-    png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width])
+    png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width], params[:background])
 
     send_data png_data, :type => 'image/png', :disposition => 'inline'
   end
@@ -18,7 +18,7 @@ class GrassGraphController < SendToFluentController
       else
         svg_data = extract_svg(params['github_id'])
       end
-      png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width])
+      png_data = generate_png(svg_data, params[:rotate], params[:height], params[:width], params[:background])
 
       send_data png_data, :type => 'image/png', :disposition => 'inline'
     rescue BadDateString
@@ -168,10 +168,10 @@ class GrassGraphController < SendToFluentController
     false
   end
 
-  def generate_png(svg_data, rotate, height, width)
+  def generate_png(svg_data, rotate, height, width, background)
     png_data = ImageConvert.svg_to_png(svg_data, 720, svg_height)
 
-    if rotate || width || height || detail_type?
+    if rotate || width || height || background || detail_type?
       width  = width  ? width.to_i : resize_width
       height = height ? height.to_i : svg_height
 
@@ -179,6 +179,7 @@ class GrassGraphController < SendToFluentController
       image.combine_options do |b|
         b.resize "#{width}x#{height}>" if width || height
         b.rotate rotate if rotate && integer_string?(rotate)
+        b.transparent('white') unless background.empty?
       end
       png_data = image.to_blob
     end
