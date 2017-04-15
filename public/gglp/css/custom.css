@@ -12,6 +12,10 @@
   height: auto;
 }
 
+.new-features {
+  color: #FF0000;
+}
+
 #services {
     position: relative;
 }
