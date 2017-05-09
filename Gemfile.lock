@@ -177,12 +177,12 @@ GEM
     msgpack (1.1.0)
     multi_json (1.12.1)
     multipart-post (2.0.0)
-    native-package-installer (1.0.0)
+    native-package-installer (1.0.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     nio4r (2.0.0)
-    nokogiri (1.7.1)
+    nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     oauth (0.5.1)
     os (0.9.6)
@@ -199,7 +199,7 @@ GEM
       pry (>= 0.10.4)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (2.0.1)
+    rack (2.0.2)
     rack-heartbeat (1.1.0)
       rack
     rack-test (0.6.3)
@@ -239,26 +239,26 @@ GEM
     rake (11.3.0)
     require_all (1.4.0)
     retriable (1.4.1)
-    rspec-core (3.5.4)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
+    rspec-core (3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-expectations (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
+      rspec-support (~> 3.6.0)
     rspec-json_matcher (0.1.6)
       awesome_print
       json
-    rspec-mocks (3.5.0)
+    rspec-mocks (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-rails (3.5.2)
+      rspec-support (~> 3.6.0)
+    rspec-rails (3.6.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-support (3.6.0)
     rsvg2 (3.1.1)
       cairo (>= 1.12.8)
       gdk_pixbuf2 (= 3.1.1)
@@ -344,6 +344,7 @@ DEPENDENCIES
   unicorn
   unicorn-worker-killer
   webmock
+
 
 RUBY VERSION
    ruby 2.4.0p0
