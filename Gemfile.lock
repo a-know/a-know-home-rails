@@ -150,7 +150,7 @@ GEM
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
       unicode-display_width (~> 0.1.1)
-    i18n (0.8.4)
+    i18n (0.8.6)
     json (2.1.0)
     jwt (1.5.6)
     kgio (2.11.0)
