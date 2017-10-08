@@ -181,6 +181,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
+    newrelic_rpm (4.5.0.337)
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
@@ -328,6 +329,7 @@ DEPENDENCIES
   mackerel-client
   metric_fu-Saikuro
   mini_magick
+  newrelic_rpm
   nokogiri (>= 1.6.8)
   pry-byebug
   pry-rails
@@ -344,7 +346,6 @@ DEPENDENCIES
   unicorn
   unicorn-worker-killer
   webmock
-
 
 RUBY VERSION
    ruby 2.4.0p0
