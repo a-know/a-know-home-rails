@@ -162,7 +162,7 @@ GEM
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
-    loofah (2.2.0)
+    loofah (2.2.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     ltsv_log_formatter (1.0.0)
@@ -327,6 +327,7 @@ DEPENDENCIES
   google-api-client (~> 0.8.6)
   hirb
   hirb-unicode
+  loofah (>= 2.2.1)
   ltsv_log_formatter
   mackerel-client
   metric_fu-Saikuro
@@ -349,9 +350,7 @@ DEPENDENCIES
   unicorn-worker-killer
   webmock
 
-
 RUBY VERSION
    ruby 2.4.0p0
-
 BUNDLED WITH
    1.14.6
