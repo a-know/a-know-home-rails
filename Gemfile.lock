@@ -162,7 +162,7 @@ GEM
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
-    loofah (2.2.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     ltsv_log_formatter (1.0.0)
@@ -223,8 +223,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     rails_best_practices (1.19.1)
       activesupport
       code_analyzer (>= 0.4.8)
@@ -339,7 +339,7 @@ DEPENDENCIES
   puma
   rack-heartbeat
   rails (>= 5.0.0.1)
-  rails-html-sanitizer (~> 1.0.3)
+  rails-html-sanitizer (>= 1.0.4)
   rails_best_practices
   rspec-json_matcher
   rspec-rails
